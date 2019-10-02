@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "100181868697",
+    "firebase_url": "https://albatrossdts.firebaseio.com",
+    "project_id": "albatrossdts",
+    "storage_bucket": "albatrossdts.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100181868697:android:cb94ab8016055b733d3808",
+        "android_client_info": {
+          "package_name": "com.example.albatrossdts"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "100181868697-b7ih7keq5ahfoukl36hij34ofu7jbqtg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.albatrossdts",
+            "certificate_hash": "dccff60bd71018e41a5982da590023e5c63567dd"
+          }
+        },
+        {
+          "client_id": "100181868697-mqc4e98l5fpg9jt6pgdgeujr41mjjv5i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjjxJgiBqU0q5hHxriJrJsRl_SILc8W3M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "100181868697-mqc4e98l5fpg9jt6pgdgeujr41mjjv5i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

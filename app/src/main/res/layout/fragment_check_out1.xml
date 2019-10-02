@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".CheckOut1">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="211dp"
+            android:layout_height="36dp"
+            android:text="Check Out Document"
+            android:textColor="@color/colorPrimary"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.25" />
+
+
+        <RelativeLayout
+            android:id="@+id/layoutScanResults"
+            android:layout_width="316dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            android:visibility="invisible">
+
+            <TextView
+                android:id="@+id/txtBarcodeNumberCheckOut"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginTop="36dp"
+                android:text="Barcode number:"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txtDocumentTitleCheckOut"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_below="@id/txtBarcodeNumberCheckOut"
+                android:layout_marginTop="36dp"
+                android:text="Document title:"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txtDocumentDescriptionCheckOut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtDocumentTitleCheckOut"
+                android:layout_marginTop="36dp"
+                android:text="Document description:"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btnScanBarcode"
+            android:layout_width="142dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="44dp"
+            android:background="@drawable/button_selector"
+            android:text="Scan Document Barcode"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutScanResults" />
+
+        <Button
+            android:id="@+id/btnNextCheckOut1"
+            android:layout_width="121dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="45dp"
+            android:background="@drawable/button_selector"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:text="NEXT"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnScanBarcode"
+            android:enabled="false"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+</ScrollView>

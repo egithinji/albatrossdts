@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home_icon"
+            android:title="Home"
+            />
+
+        <item android:title="Document Activities">
+            <menu>
+                <item
+                    android:id="@+id/nav_action1"
+                    android:icon="@drawable/checkin"
+                    android:title="Check in" />
+                <item
+                    android:id="@+id/nav_action2"
+                    android:icon="@drawable/checkout"
+                    android:title="Check out" />
+                <item
+                    android:id="@+id/nav_action3"
+                    android:icon="@drawable/newicon"
+                    android:title="Add new" />
+                <item
+                    android:id="@+id/nav_action4"
+                    android:icon="@drawable/deleteicon"
+                    android:title="Delete" />
+            </menu>
+        </item>
+    </group>
+
+</menu>
