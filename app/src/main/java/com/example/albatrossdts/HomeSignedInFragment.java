@@ -79,7 +79,7 @@ public class HomeSignedInFragment extends Fragment {
         btnHelp = view.findViewById(R.id.btnHelp);
 
         //Username should be captured in mUsername
-        txtWelcome.setText("Welcome to the Document Tracking System, "+mUsername+".");
+        txtWelcome.setText("Welcome to the Albatross Document Tracking System, "+mUsername+".");
         //Get the date using the getDate() method
         txtDate.setText(getDate());
 
