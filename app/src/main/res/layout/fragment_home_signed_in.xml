@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HomeSignedInFragment">
+    tools:context=".HomeSignedInFragment"
+    >
 
     <Button
         android:layout_width="100dp"
@@ -16,7 +17,8 @@
         app:layout_constraintRight_toRightOf="parent"
         android:textSize="12sp"
         android:background="@drawable/rounded_button_selector"
-        android:text="Help"/>
+        android:text="Help"
+        android:fontFamily="@font/montserratlight"/>
 
     <TextView
         android:id="@+id/txtWelcomeMessage"
@@ -28,7 +30,8 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="28sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnHelp" />
+        app:layout_constraintTop_toBottomOf="@id/btnHelp"
+        android:fontFamily="@font/montserratregular"/>
 
     <TextView
         android:id="@+id/txtDate"
@@ -40,7 +43,8 @@
         android:textColor="@color/colorAccent"
         android:textSize="28sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtWelcomeMessage" />
+        app:layout_constraintTop_toBottomOf="@id/txtWelcomeMessage"
+        android:fontFamily="@font/montserratlight"/>
 
 
 

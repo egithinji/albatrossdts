@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="314dp"
-        android:layout_height="34dp"
+        android:layout_height="wrap_content"
         android:text="Documents Summary Report"
         android:textColor="@color/colorPrimary"
         android:textSize="22sp"
@@ -19,6 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.25"
         android:textAlignment="center"
+        android:fontFamily="@font/montserratregular"
         />
 
     <Button
@@ -30,7 +31,8 @@
         android:text="Generate Report"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:fontFamily="@font/montserratlight"/>
 
     <ProgressBar
         android:id="@+id/determinateBar"
@@ -56,6 +58,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/determinateBar"/>
+        app:layout_constraintTop_toBottomOf="@id/determinateBar"
+        android:fontFamily="@font/montserratlight"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

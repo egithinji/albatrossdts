@@ -13,7 +13,7 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="211dp"
+            android:layout_width="250dp"
             android:layout_height="36dp"
             android:text="Check Out Document"
             android:textColor="@color/colorPrimary"
@@ -22,7 +22,9 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.25" />
+            app:layout_constraintVertical_bias="0.25"
+            android:fontFamily="@font/montserratregular"
+            android:textAlignment="center"/>
 
 
         <RelativeLayout
@@ -42,7 +44,8 @@
                 android:layout_marginTop="36dp"
                 android:text="Barcode number:"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:fontFamily="@font/montserratlight"/>
 
             <TextView
                 android:id="@+id/txtDocumentTitleCheckOut"
@@ -52,7 +55,8 @@
                 android:layout_marginTop="36dp"
                 android:text="Document title:"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:fontFamily="@font/montserratlight"/>
 
             <TextView
                 android:id="@+id/txtDocumentDescriptionCheckOut"
@@ -62,7 +66,8 @@
                 android:layout_marginTop="36dp"
                 android:text="Document description:"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:fontFamily="@font/montserratlight"/>
 
         </RelativeLayout>
 
@@ -75,7 +80,8 @@
             android:text="Scan Document Barcode"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layoutScanResults" />
+            app:layout_constraintTop_toBottomOf="@+id/layoutScanResults"
+            android:fontFamily="@font/montserratlight"/>
 
         <Button
             android:id="@+id/btnNextCheckOut1"
@@ -92,6 +98,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnScanBarcode"
             android:enabled="false"
+            android:fontFamily="@font/montserratlight"
             />
 
 

@@ -13,7 +13,7 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="199dp"
+            android:layout_width="240dp"
             android:layout_height="31dp"
             android:text="Add New Document"
             android:textColor="@color/colorPrimary"
@@ -22,20 +22,23 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.18" />
+            app:layout_constraintVertical_bias="0.18"
+            android:fontFamily="@font/montserratregular"
+            android:textAlignment="center"/>
 
         <TextView
             android:id="@+id/txtReview"
-            android:layout_width="78dp"
+            android:layout_width="100dp"
             android:layout_height="27dp"
             android:layout_marginTop="12dp"
             android:text="Summary"
             android:textColor="#000000"
             android:textSize="17sp"
-            android:textStyle="bold"
+            android:textAlignment="center"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView" />
+            app:layout_constraintTop_toBottomOf="@id/textView"
+            android:fontFamily="@font/montserratlight"/>
 
         <ImageView
             android:id="@+id/imgSummaryDocumentPhoto"
@@ -49,6 +52,7 @@
             android:id="@+id/txtSummaryDocumentTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"
             android:text="Document Title: "
             android:textColor="@color/colorPrimaryDark"
@@ -56,7 +60,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imgSummaryDocumentPhoto"
-            app:layout_constraintVertical_bias="0.041" />
+            app:layout_constraintVertical_bias="0.041"
+            android:fontFamily="@font/montserratlight"/>
 
         <TextView
             android:id="@+id/txtSummaryDocumentDescription"
@@ -69,7 +74,8 @@
             android:layout_marginLeft="10dp"
             app:layout_constraintLeft_toLeftOf="@id/txtSummaryDocumentTitle"
             app:layout_constraintTop_toBottomOf="@id/txtSummaryDocumentTitle"
-            app:layout_constraintVertical_bias="0.25"/>
+            app:layout_constraintVertical_bias="0.25"
+            android:fontFamily="@font/montserratlight"/>
 
         <TextView
             android:id="@+id/txtSummaryDocumentLocation"
@@ -82,7 +88,8 @@
             android:layout_marginLeft="10dp"
             app:layout_constraintLeft_toLeftOf="@id/txtSummaryDocumentTitle"
             app:layout_constraintTop_toBottomOf="@id/txtSummaryDocumentDescription"
-            app:layout_constraintVertical_bias="0.25"/>
+            app:layout_constraintVertical_bias="0.25"
+            android:fontFamily="@font/montserratlight"/>
 
         <TextView
             android:id="@+id/txtSummaryBarcodeNumber"
@@ -95,7 +102,8 @@
             android:layout_marginLeft="10dp"
             app:layout_constraintLeft_toLeftOf="@id/txtSummaryDocumentTitle"
             app:layout_constraintTop_toBottomOf="@id/txtSummaryDocumentLocation"
-            app:layout_constraintVertical_bias="0.25"/>
+            app:layout_constraintVertical_bias="0.25"
+            android:fontFamily="@font/montserratlight"/>
 
         <Button
             android:id="@+id/btnBack4AddNew"
@@ -110,7 +118,8 @@
             app:layout_constraintHorizontal_bias="0.594"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/btnSubmitAddNew"
-            app:layout_constraintTop_toTopOf="@+id/btnSubmitAddNew" />
+            app:layout_constraintTop_toTopOf="@+id/btnSubmitAddNew"
+            android:fontFamily="@font/montserratlight"/>
 
         <Button
             android:id="@+id/btnSubmitAddNew"
@@ -127,7 +136,8 @@
             app:layout_constraintHorizontal_bias=".8"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtSummaryBarcodeNumber" />
+            app:layout_constraintTop_toBottomOf="@+id/txtSummaryBarcodeNumber"
+            android:fontFamily="@font/montserratlight"/>
 
         <ProgressBar
             android:id="@+id/progressBarSummary"

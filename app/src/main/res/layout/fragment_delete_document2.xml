@@ -26,6 +26,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintVertical_bias="0.10"
+        android:fontFamily="@font/montserratregular"
+        android:textAlignment="center"
         />
 
     <RelativeLayout
@@ -44,6 +46,7 @@
             android:text="Barcode Number:"
             android:textColor="#000000"
             android:textSize="16sp"
+            android:fontFamily="@font/montserratlight"
             />
 
         <TextView
@@ -54,6 +57,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_below="@+id/txtBarcodeNumber"
+            android:fontFamily="@font/montserratlight"
             />
 
         <TextView
@@ -65,6 +69,7 @@
             android:textSize="16sp"
             android:layout_below="@+id/txtBarcodeNumberContent"
             android:layout_marginTop="20dp"
+            android:fontFamily="@font/montserratlight"
             />
 
         <TextView
@@ -75,6 +80,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_below="@+id/txtDocumentTitle"
+            android:fontFamily="@font/montserratlight"
             />
 
         <TextView
@@ -86,6 +92,7 @@
             android:textSize="16sp"
             android:layout_below="@+id/txtDocumentTitleContent"
             android:layout_marginTop="20dp"
+            android:fontFamily="@font/montserratlight"
             />
 
         <TextView
@@ -95,7 +102,8 @@
             android:textColor="#000000"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_below="@+id/txtDocumentDescription"/>
+            android:layout_below="@+id/txtDocumentDescription"
+            android:fontFamily="@font/montserratlight"/>
 
         <ImageView
             android:id="@+id/imgDocumentPhoto"
@@ -110,13 +118,15 @@
     <TextView
         android:id="@+id/txtReason"
         android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Please enter the reason for deleting this document:"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/layoutSearchResults"
         app:layout_constraintTop_toBottomOf="@+id/layoutSearchResults"
+        android:fontFamily="@font/montserratlight"
+        android:layout_marginLeft="20dp"
         />
 
     <EditText
@@ -127,6 +137,7 @@
         app:layout_constraintStart_toStartOf="@+id/txtReason"
         app:layout_constraintTop_toBottomOf="@+id/txtReason"
         android:background="@drawable/edit_text_normal"
+        android:fontFamily="@font/montserratlight"
         />
 
     <Button
@@ -134,7 +145,6 @@
         android:layout_width="121dp"
         android:layout_height="52dp"
         android:layout_marginTop="44dp"
-
         android:background="@drawable/rounded_button_selector"
         android:minWidth="0dp"
         android:minHeight="0dp"
@@ -144,16 +154,15 @@
         app:layout_constraintHorizontal_bias="0.155"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEditReason" />
+        app:layout_constraintTop_toBottomOf="@+id/txtEditReason"
+        android:fontFamily="@font/montserratlight"/>
 
     <Button
         android:id="@+id/btnDelete"
-        android:layout_width="156dp"
+        android:layout_width="165dp"
         android:layout_height="52dp"
         android:layout_marginStart="56dp"
         android:layout_marginLeft="20dp"
-
-
         android:background="@drawable/rounded_button_selector"
         android:minWidth="0dp"
         android:minHeight="0dp"
@@ -163,7 +172,8 @@
         app:layout_constraintHorizontal_bias="0.817"
         app:layout_constraintLeft_toLeftOf="@id/btnBackDeleteDocument2"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnBackDeleteDocument2" />
+        app:layout_constraintTop_toTopOf="@+id/btnBackDeleteDocument2"
+        android:fontFamily="@font/montserratlight"/>
 
     <ProgressBar
         android:id="@+id/progressBar"
