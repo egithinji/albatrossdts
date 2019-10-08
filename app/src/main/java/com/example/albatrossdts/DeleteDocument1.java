@@ -174,7 +174,7 @@ public class DeleteDocument1 extends Fragment {
 
                             }else{
                                 //Document not found
-                                Toast.makeText(getContext(),"Document not found",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(),"Item not found",Toast.LENGTH_LONG).show();
                                 progressBar.setVisibility(View.INVISIBLE);
                             }
 

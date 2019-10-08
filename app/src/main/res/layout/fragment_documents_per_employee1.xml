@@ -10,7 +10,7 @@
         android:id="@+id/textView"
         android:layout_width="350dp"
         android:layout_height="56dp"
-        android:text="Documents per Employee Report"
+        android:text="Items per Employee Report"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         android:textSize="22sp"

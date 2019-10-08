@@ -11,7 +11,7 @@
             android:title="Home"
             />
 
-        <item android:title="Document Activities">
+        <item android:title="Activities">
             <menu>
                 <item
                     android:id="@+id/nav_action1"

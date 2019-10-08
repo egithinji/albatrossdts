@@ -10,7 +10,7 @@
         android:id="@+id/textView"
         android:layout_width="314dp"
         android:layout_height="wrap_content"
-        android:text="Documents Summary Report"
+        android:text="Item Summary Report"
         android:textColor="@color/colorPrimary"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"

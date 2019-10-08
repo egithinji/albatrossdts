@@ -79,7 +79,7 @@ public class TransactionsByDocument1 extends Fragment {
 
     //Spreadsheet objects
     private XSSFWorkbook workbook = new XSSFWorkbook();
-    private XSSFSheet spreadsheet = workbook.createSheet("Transactions by Document");
+    private XSSFSheet spreadsheet = workbook.createSheet("Transactions by Item");
     private int rowPosition = 0;
 
     //Hashmap for storing doc barcodes and titles
@@ -323,7 +323,7 @@ public class TransactionsByDocument1 extends Fragment {
         XSSFCell titleCell = row.createCell(0);
         titleCell.setCellStyle(titleStyle);
         //Add the title. Cell should be first in first row from declaration at beginning of class
-        titleCell.setCellValue("Transactions by Document Report");
+        titleCell.setCellValue("Transactions by Item Report");
 
         //Jump to next row
         rowPosition++;
@@ -375,7 +375,7 @@ public class TransactionsByDocument1 extends Fragment {
 
         row = spreadsheet.createRow(rowPosition);
         subTitleCell = row.createCell(0);
-        subTitleCell.setCellValue("Document Title:");
+        subTitleCell.setCellValue("Item Name:");
         subTitleCell.setCellStyle(styleSubTitle);
 
         valuesCell = row.createCell(1);
@@ -490,12 +490,12 @@ public class TransactionsByDocument1 extends Fragment {
             SharedPreferences employeeSharedPref = getActivity().getSharedPreferences("EmployeeData",0);
 
             //Build the body
-            String body = "Please find attached the Transactions By Document Report."; //TODO: Replace with string resource
+            String body = "Please find attached the Transactions By Item Report."; //TODO: Replace with string resource
 
             //Name of attached file
-            String fileName = "Transactions_By_Document_Report.xlsx"; //TODO: Replace with string resource
+            String fileName = "Transactions_By_Item_Report.xlsx"; //TODO: Replace with string resource
 
-            sender.sendMail("Transactions By Document Report",//TODO:Need to replace some of these with either string resources or something else not hardcoded.
+            sender.sendMail("Transactions By Item Report",//TODO:Need to replace some of these with either string resources or something else not hardcoded.
                     body,
                     MainActivity.EMAIL_ADDRESS,
                     employeeSharedPref.getString("email_address",""),
@@ -511,7 +511,7 @@ public class TransactionsByDocument1 extends Fragment {
                 }
             });
             workbook = new XSSFWorkbook();
-            spreadsheet = workbook.createSheet("Transactions by Document");
+            spreadsheet = workbook.createSheet("Transactions by Item");
             rowPosition = 0;
 
         } catch (Exception e) {

@@ -192,7 +192,7 @@ public class CheckOut1 extends Fragment {
 
                             }else{
                                 //Document not found
-                                Toast.makeText(getContext(),"No document found with that barcode number.",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(),"No item found with that barcode number.",Toast.LENGTH_LONG).show();
 
                             }
 

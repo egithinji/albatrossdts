@@ -169,7 +169,7 @@ public class CheckIn2 extends Fragment {
 
                                 Document doc = qds.toObject(Document.class);
                                 if(doc.getCurrently_checked_out_to()==null){//If document already checked in, notify user and don't do anything else.
-                                    Toast.makeText(getContext(),"Document already checked in at "+doc.getPermanent_location(),Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getContext(),"Item already checked in at "+doc.getPermanent_location(),Toast.LENGTH_LONG).show();
                                     progressBar.setVisibility(View.INVISIBLE);
                                     ((MainActivity)getActivity()).replaceFragment("CheckIn1",false);
                                 }else{
@@ -202,7 +202,7 @@ public class CheckIn2 extends Fragment {
                                                             .addOnFailureListener(new OnFailureListener() {
                                                                 @Override
                                                                 public void onFailure(@NonNull Exception e) {
-                                                                    Toast.makeText(getContext(),"Error updating document.",Toast.LENGTH_LONG).show();
+                                                                    Toast.makeText(getContext(),"Error updating item.",Toast.LENGTH_LONG).show();
                                                                 }
                                                             });
 
@@ -211,7 +211,7 @@ public class CheckIn2 extends Fragment {
                                             .addOnFailureListener(new OnFailureListener() {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(getContext(),"Error updating document.",Toast.LENGTH_LONG).show();
+                                                    Toast.makeText(getContext(),"Error updating item.",Toast.LENGTH_LONG).show();
                                                 }
                                             });
 
@@ -254,7 +254,7 @@ public class CheckIn2 extends Fragment {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         progressBar.setVisibility(View.INVISIBLE);
-                                        Toast.makeText(getContext(),"Document checked in.",Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getContext(),"Item checked in.",Toast.LENGTH_LONG).show();
                                         getEmail(); //getEmail kicks off the process that results in an email being sent using the approved email credentials from the database.
                                         launchNextFragment();
                                     }
@@ -340,9 +340,9 @@ public class CheckIn2 extends Fragment {
             dateAndTime = dateFormat.format(calendar.getTime());
 
             //Build the body
-            String body = "Document with barcode number '"+sharedPreferences.getString("document_barcode_number","")+"' and title '"+sharedPreferences.getString("document_title","")+"' was checked in by "+employeeSharedPreferences.getString("first_name","")+" "+employeeSharedPreferences.getString("last_name","")+" on "+dateAndTime+".\nStorage Location: "+spinnerLocation.getSelectedItem().toString();
+            String body = "Item with barcode number '"+sharedPreferences.getString("document_barcode_number","")+"' and name '"+sharedPreferences.getString("document_title","")+"' was checked in by "+employeeSharedPreferences.getString("first_name","")+" "+employeeSharedPreferences.getString("last_name","")+" on "+dateAndTime+".\nStorage Location: "+spinnerLocation.getSelectedItem().toString();
 
-            sender.sendMail("Document Check-in",//TODO:Need to replace some of these with either string resources or something else not hardcoded.
+            sender.sendMail("Item Check-in",//TODO:Need to replace some of these with either string resources or something else not hardcoded.
                     body,
                     MainActivity.EMAIL_ADDRESS,
                     MainActivity.EMAIL_FOR_NOTIFICATIONS,

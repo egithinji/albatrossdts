@@ -230,12 +230,12 @@ public class CheckOut2 extends Fragment {
                                             .addOnFailureListener(new OnFailureListener() {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(getContext(),"Error updating document.",Toast.LENGTH_LONG).show();
+                                                    Toast.makeText(getContext(),"Error updating item.",Toast.LENGTH_LONG).show();
                                                 }
                                             });
                                 }
                                 else if(document.getCurrently_checked_out_to().equals(user.getUid())){//Had to get uid from the user object instead of employeeSharedPreferences to avoid issues
-                                    Toast.makeText(getContext(),"This document is already checked out to you.",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getContext(),"This item is already checked out to you.",Toast.LENGTH_LONG).show();
                                     progressBar.setVisibility(View.INVISIBLE);
                                     ((MainActivity)getActivity()).replaceFragment("CheckOut1",false);
                                 }else{
@@ -254,7 +254,7 @@ public class CheckOut2 extends Fragment {
                                             .addOnFailureListener(new OnFailureListener() {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(getContext(),"Error updating document.",Toast.LENGTH_LONG).show();
+                                                    Toast.makeText(getContext(),"Error updating item.",Toast.LENGTH_LONG).show();
                                                 }
                                             });
                                 }
@@ -295,7 +295,7 @@ public class CheckOut2 extends Fragment {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 progressBar.setVisibility(View.INVISIBLE);
-                                Toast.makeText(getContext(),"Document checked out.",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(),"Item checked out.",Toast.LENGTH_LONG).show();
                                 getEmail(); //getEmail kicks off the process that results in an email being sent using the approved email credentials from the database.
                                 launchNextFragment();
                             }
@@ -324,9 +324,9 @@ public class CheckOut2 extends Fragment {
             dateAndTime = dateFormat.format(calendar.getTime());
 
             //Build the body
-            String body = "Document with barcode number '"+sharedPreferences.getString("document_barcode_number","")+"' and title '"+sharedPreferences.getString("document_title","")+"' was checked out by "+employeeSharedPreferences.getString("first_name","")+" "+employeeSharedPreferences.getString("last_name","")+" on "+dateAndTime+".\nPurpose: '"+spinnerReason.getSelectedItem().toString()+"'";
+            String body = "Item with barcode number '"+sharedPreferences.getString("document_barcode_number","")+"' and name '"+sharedPreferences.getString("document_title","")+"' was checked out by "+employeeSharedPreferences.getString("first_name","")+" "+employeeSharedPreferences.getString("last_name","")+" on "+dateAndTime+".\nPurpose: '"+spinnerReason.getSelectedItem().toString()+"'";
 
-            sender.sendMail("Document Check-out",//TODO:Need to replace some of these with either string resources or something else not hardcoded.
+            sender.sendMail("Item Check-out",//TODO:Need to replace some of these with either string resources or something else not hardcoded.
                     body,
                     MainActivity.EMAIL_ADDRESS,
                     MainActivity.EMAIL_FOR_NOTIFICATIONS,

@@ -227,7 +227,7 @@ public class TransactionsSummary1 extends Fragment {
 
                             //Second column header
                             cell = row.createCell(1);
-                            cell.setCellValue("Document Title");
+                            cell.setCellValue("Item Name");
                             cell.setCellStyle(styleColumnHeaders);
 
                             //Third column header

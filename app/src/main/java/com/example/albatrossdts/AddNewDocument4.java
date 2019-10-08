@@ -186,7 +186,7 @@ public class AddNewDocument4 extends Fragment {
                         //Make progress bar invisible
                         progressBar.setVisibility(View.INVISIBLE);
 
-                        Toast.makeText(getContext(),"A document with that barcode number already exists in the database.",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(),"An item with that barcode number already exists in the database.",Toast.LENGTH_LONG).show();
                     }else{
                         //The barcode number is unique. Submit
                         submit();
@@ -259,7 +259,7 @@ public class AddNewDocument4 extends Fragment {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         //Display Toast
-                                        Toast.makeText(getContext(),"Document submitted successfully.",Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getContext(),"Item submitted successfully.",Toast.LENGTH_LONG).show();
 
                                         getEmail(); //getEmail kicks off the process that results in an email being sent using the approved email credentials from the database.
                                     }
@@ -345,9 +345,9 @@ public class AddNewDocument4 extends Fragment {
             SharedPreferences employeeSharedPref = getActivity().getSharedPreferences("EmployeeData",0);
 
             //Build the body
-            String body = "Document with barcode number '"+sharedPref.getString("barcode_number","")+"' and title '"+sharedPref.getString("title","")+"' was added to the database by "+employeeSharedPref.getString("first_name","")+" "+employeeSharedPref.getString("last_name","")+" on "+dateAndTime+".\nStorage Location: "+sharedPref.getString("location","");
+            String body = "Item with barcode number '"+sharedPref.getString("barcode_number","")+"' and name '"+sharedPref.getString("title","")+"' was added to the database by "+employeeSharedPref.getString("first_name","")+" "+employeeSharedPref.getString("last_name","")+" on "+dateAndTime+".\nStorage Location: "+sharedPref.getString("location","");
 
-            sender.sendMail("New Document Added",//TODO:Need to replace some of these with either string resources or something else not hardcoded.
+            sender.sendMail("New Item Added",//TODO:Need to replace some of these with either string resources or something else not hardcoded.
                     body,
                     MainActivity.EMAIL_ADDRESS,
                     MainActivity.EMAIL_FOR_NOTIFICATIONS,

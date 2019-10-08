@@ -57,8 +57,8 @@ public class MainActivity extends AppCompatActivity
     private static String CURRENT_FRAGMENT = ""; //TODO: This was an attempt at fixing the issue when activity is destroyed upon screen rotation but didn't work too well. I've temporarily disabled landscape orientation.
 
     //Static variables to hold transaction types
-    public static final String TRANSACTION_TYPE_ADD = "Add Document";
-    public static final String TRANSACTION_TYPE_DELETE = "Delete Document";
+    public static final String TRANSACTION_TYPE_ADD = "Add Item";
+    public static final String TRANSACTION_TYPE_DELETE = "Delete Item";
     public static final String TRANSACTION_TYPE_CHECKOUT = "Check-out";
     public static final String TRANSACTION_TYPE_CHECKIN = "Check-in";
 

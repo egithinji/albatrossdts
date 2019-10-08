@@ -91,7 +91,7 @@ public class DocumentsPerEmployee1 extends Fragment {
 
     //Spreadsheet objects
     private XSSFWorkbook workbook = new XSSFWorkbook();
-    private XSSFSheet spreadsheet = workbook.createSheet("Documents Per Employee");
+    private XSSFSheet spreadsheet = workbook.createSheet("Items Per Employee");
     private int rowPosition = 0;
 
     //File object
@@ -195,7 +195,7 @@ public class DocumentsPerEmployee1 extends Fragment {
         XSSFCell titleCell = row.createCell(0);
         titleCell.setCellStyle(titleStyle);
         //Add the title. Cell should be first in first row from declaration at beginning of class
-        titleCell.setCellValue("Documents per Employee Report");
+        titleCell.setCellValue("Items per Employee Report");
 
         //Jump to next row
         rowPosition++;
@@ -255,7 +255,7 @@ public class DocumentsPerEmployee1 extends Fragment {
 
         //Second column header
         headerCell = row.createCell(1);
-        headerCell.setCellValue("Document Title");
+        headerCell.setCellValue("Item Name");
         headerCell.setCellStyle(styleColumnHeaders);
 
         //Third column header
@@ -491,12 +491,12 @@ public class DocumentsPerEmployee1 extends Fragment {
             SharedPreferences employeeSharedPref = getActivity().getSharedPreferences("EmployeeData",0);
 
             //Build the body
-            String body = "Please find attached the Documents per Employee Report."; //TODO: Replace with string resource
+            String body = "Please find attached the Items per Employee Report."; //TODO: Replace with string resource
 
             //Name of attached file
-            String fileName = "Documents_per_Employee_Report.xlsx"; //TODO: Replace with string resource
+            String fileName = "Items_per_Employee_Report.xlsx"; //TODO: Replace with string resource
 
-            sender.sendMail("Documents per Employee Report",//TODO:Need to replace some of these with either string resources or something else not hardcoded.
+            sender.sendMail("Items per Employee Report",//TODO:Need to replace some of these with either string resources or something else not hardcoded.
                     body,
                     MainActivity.EMAIL_ADDRESS,
                     employeeSharedPref.getString("email_address",""),
@@ -534,38 +534,6 @@ public class DocumentsPerEmployee1 extends Fragment {
         return formattedDate;
     }
 
-    /*private void populateEmployees() {
-        //Get the employees from firestore and store in a Employee object
-        //Update the adapter with the employee names.
-
-        db.collection("employees")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    private static final String TAG = "" ;
-
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Employee employee = document.toObject(Employee.class);
-
-                                //Add entry to employee HashMap. The key is their name plus email address in brackets. The value is their uid.
-                                //This is to enable the user to uniquely identify the user, in case there is more than one person with the same first and last name.
-                                //The UID is used when querying the database for documents checked out by the specific employee.
-
-                                if(!(employee.getUid()==null)) { //don't add any unauthenticated users to the list.
-                                    employees.put(employee.getFirst_name() + " " + employee.getLast_name() + " (" + employee.getEmail_address() + ")", employee.getUid());
-                                    //Update the adapter
-                                    adapter.add(employee.getFirst_name()+" "+employee.getLast_name()+" ("+employee.getEmail_address()+")");
-                                }
-                            }
-                            btnGenerate.setEnabled(true);
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
-    }*/
 
 
     private void populateEmployees(){

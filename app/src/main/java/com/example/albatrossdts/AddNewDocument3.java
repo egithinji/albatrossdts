@@ -189,7 +189,7 @@ public class AddNewDocument3 extends Fragment {
 
         if(sharedPref.getString("barcode_number","").equals("")){
             //The user must scan a barcode
-            Toast.makeText(getContext(),"Please scan the document's barcode.",Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(),"Please scan the item's barcode.",Toast.LENGTH_LONG).show();
         }else {
             launchNextFragment();
         }

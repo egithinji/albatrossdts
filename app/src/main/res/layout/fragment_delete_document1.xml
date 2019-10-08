@@ -16,7 +16,7 @@
             android:id="@+id/textView"
             android:layout_width="240dp"
             android:layout_height="31dp"
-            android:text="Delete Document"
+            android:text="Delete Item"
             android:textColor="@color/colorPrimary"
             android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="parent"

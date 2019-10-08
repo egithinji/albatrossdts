@@ -306,7 +306,7 @@ public class DeleteDocument2 extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(context,"Document deleted.",Toast.LENGTH_LONG).show();
+                        Toast.makeText(context,"Item deleted.",Toast.LENGTH_LONG).show();
                         getEmail(context); //getEmail kicks off the process that results in an email being sent using the approved email credentials from the database.
                         launchNextFragment(context);
 
@@ -411,9 +411,9 @@ public class DeleteDocument2 extends Fragment {
             SharedPreferences employeeSharedPreferences = context.getSharedPreferences("EmployeeData",0);
 
             //Build the body
-            String body = "Document with barcode number '"+sharedPreferences.getString("document_barcode_number","")+"' and title '"+sharedPreferences.getString("document_title","")+"' was deleted by "+employeeSharedPreferences.getString("first_name","")+" "+employeeSharedPreferences.getString("last_name","")+" on "+dateAndTime+".\nReason: '"+sharedPreferences.getString("purpose","")+"'";
+            String body = "Item with barcode number '"+sharedPreferences.getString("document_barcode_number","")+"' and name '"+sharedPreferences.getString("document_title","")+"' was deleted by "+employeeSharedPreferences.getString("first_name","")+" "+employeeSharedPreferences.getString("last_name","")+" on "+dateAndTime+".\nReason: '"+sharedPreferences.getString("purpose","")+"'";
 
-            sender.sendMail("Document Deleted",//TODO:Need to replace some of these with either string resources or something else not hardcoded.
+            sender.sendMail("Item Deleted",//TODO:Need to replace some of these with either string resources or something else not hardcoded.
                     body,
                     MainActivity.EMAIL_ADDRESS,
                     MainActivity.EMAIL_FOR_NOTIFICATIONS,

@@ -56,7 +56,7 @@ import java.util.HashMap;
  * create an instance of this fragment.
  */
 public class DocumentsSummary1 extends Fragment {
-    private static final String TAG = "Documents Summary";
+    private static final String TAG = "Item Summary";
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     //private static final String ARG_PARAM1 = "param1";
@@ -187,7 +187,7 @@ public class DocumentsSummary1 extends Fragment {
                             File file = new File(getContext().getExternalFilesDir(null),"createworkbook.xlsx");
 
                             //Create a spreadsheet with correct name
-                            XSSFSheet spreadsheet = workbook.createSheet("Documents Summary");
+                            XSSFSheet spreadsheet = workbook.createSheet("Item Summary");
 
                             //Set column widths to fit the column titles almost exactly
                             spreadsheet.setColumnWidth(0,3000);
@@ -217,7 +217,7 @@ public class DocumentsSummary1 extends Fragment {
                             XSSFCell cell = row.createCell(0);
                             cell.setCellStyle(titleStyle);
                             //Add the title
-                            cell.setCellValue("Documents Summary Report");
+                            cell.setCellValue("Item Summary Report");
 
                             //Set row position for writing next row
                             int rowPosition = 1;
@@ -264,12 +264,12 @@ public class DocumentsSummary1 extends Fragment {
 
                             //Second column header
                             cell = row.createCell(1);
-                            cell.setCellValue("Document Title");
+                            cell.setCellValue("Item Name");
                             cell.setCellStyle(styleColumnHeaders);
 
                             //Third column header
                             cell = row.createCell(2);
-                            cell.setCellValue("Document Description");
+                            cell.setCellValue("Item Description");
                             cell.setCellStyle(styleColumnHeaders);
 
                             //Fourth column header
@@ -472,12 +472,12 @@ public class DocumentsSummary1 extends Fragment {
             SharedPreferences employeeSharedPref = getActivity().getSharedPreferences("EmployeeData",0);
 
             //Build the body
-            String body = "Please find attached the Documents Summary Report.";
+            String body = "Please find attached the Item Summary Report.";
 
             //Name of attached file
-            String fileName = "Documents_Summary_Report.xlsx"; //TODO: Replace with string resource
+            String fileName = "Item_Summary_Report.xlsx"; //TODO: Replace with string resource
 
-            sender.sendMail("Documents Summary Report",//TODO:Need to replace some of these with either string resources or something else not hardcoded.
+            sender.sendMail("Item Summary Report",//TODO:Need to replace some of these with either string resources or something else not hardcoded.
                         body,
                         email,
                         employeeSharedPref.getString("email_address",""),

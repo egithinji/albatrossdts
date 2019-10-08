@@ -16,11 +16,11 @@
                 <item
                     android:id="@+id/nav_report1"
                     android:icon="@drawable/reporticon"
-                    android:title="@string/menu_report1" />
+                    android:title="Item Summary" />
                 <item
                     android:id="@+id/nav_report2"
                     android:icon="@drawable/reporticon"
-                    android:title="@string/menu_report2" />
+                    android:title="Items per Employee" />
                 <item
                     android:id="@+id/nav_report3"
                     android:icon="@drawable/reporticon"
@@ -28,7 +28,7 @@
                 <item
                     android:id="@+id/nav_report4"
                     android:icon="@drawable/reporticon"
-                    android:title="@string/menu_report4" />
+                    android:title="Transactions by Item" />
             </menu>
         </item>
 
