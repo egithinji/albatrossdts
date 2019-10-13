@@ -155,11 +155,19 @@ public class CheckOut2 extends Fragment {
             public void onClick(View view) {
                     progressBar.setVisibility(View.VISIBLE);
                     checkOutDocument();
+                    //demoCheckOut();
             }
         });
 
 
         return view;
+    }
+
+    private void demoCheckOut() {
+        //Dummy checkout for demonstration purposes
+        getEmail();
+
+
     }
 
     private void getReasons() {
@@ -205,7 +213,7 @@ public class CheckOut2 extends Fragment {
 
                                 //Compare the 'currently_checked_out_to' value with the user's uid. If the same, inform user
                                 //that document currently checked out to them and don't do anything else.
-                                //TODO: The below technique uses boilerplate and should be replaced with something more elegant.
+                                //TODO: The below technique uses boilerplate and should be replaced with something more efficient.
 
                                 if(document.getCurrently_checked_out_to()==null){//If I don't do this I get a null pointer exception when comparing the document's checked_out_to value.
                                     final DocumentReference dr = qds.getReference();
@@ -215,16 +223,14 @@ public class CheckOut2 extends Fragment {
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
-
-
-                                                    dr.update("purpose",spinnerReason.getSelectedItem().toString()) //Add th purpose for checkout
+                                                    //Update the purpose
+                                                    dr.update("purpose",spinnerReason.getSelectedItem().toString()) //Add the purpose for checkout
                                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                 @Override
                                                                 public void onSuccess(Void aVoid) {
                                                                     submitTransaction(spinnerReason.getSelectedItem().toString(), dr);
                                                                 }
                                                             });
-
                                                 }
                                             })
                                             .addOnFailureListener(new OnFailureListener() {
@@ -234,11 +240,13 @@ public class CheckOut2 extends Fragment {
                                                 }
                                             });
                                 }
-                                else if(document.getCurrently_checked_out_to().equals(user.getUid())){//Had to get uid from the user object instead of employeeSharedPreferences to avoid issues
-                                    Toast.makeText(getContext(),"This item is already checked out to you.",Toast.LENGTH_LONG).show();
-                                    progressBar.setVisibility(View.INVISIBLE);
-                                    ((MainActivity)getActivity()).replaceFragment("CheckOut1",false);
-                                }else{
+                                //Commenting out following for demo version. Since all demo users are the same user, they would get informed the item is already checked out to them
+                                //else if(document.getCurrently_checked_out_to().equals(user.getUid())){//Had to get uid from the user object instead of employeeSharedPreferences to avoid issues
+                                //    Toast.makeText(getContext(),"This item is already checked out to you.",Toast.LENGTH_LONG).show();
+                                //    progressBar.setVisibility(View.INVISIBLE);
+                                //    ((MainActivity)getActivity()).replaceFragment("CheckOut1",false);
+                                //}
+                                else{
                                      final DocumentReference dr = qds.getReference();
                                     //Update the 'checked out to'value of this document
                                     dr
@@ -247,8 +255,14 @@ public class CheckOut2 extends Fragment {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
 
-                                                    submitTransaction(spinnerReason.getSelectedItem().toString(), dr);
-
+                                                    //Update the purpose
+                                                    dr.update("purpose",spinnerReason.getSelectedItem().toString()) //Add the purpose for checkout
+                                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                @Override
+                                                                public void onSuccess(Void aVoid) {
+                                                                    submitTransaction(spinnerReason.getSelectedItem().toString(), dr);
+                                                                }
+                                                            });
                                                 }
                                             })
                                             .addOnFailureListener(new OnFailureListener() {
@@ -334,6 +348,10 @@ public class CheckOut2 extends Fragment {
                     null);
             Log.i("SendMail","Email sent successfully");
             clearSharedPreferences();
+
+            launchNextFragment();
+
+
         } catch (Exception e) {
             Log.e("SendMail", e.getMessage(), e);
             //TODO: Need to find a way to notify user if email notification not sent
@@ -402,6 +420,16 @@ public class CheckOut2 extends Fragment {
 
     private void launchNextFragment() {
         //Replaces the fragment in the frame_layout in app_bar_main.xml
+
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                //Display Toast
+                Toast.makeText(getContext(),"Item checked out.",Toast.LENGTH_LONG).show();
+            }
+        });
+
+        progressBar.setVisibility(View.INVISIBLE);
 
         //See solution at https://stackoverflow.com/questions/13216916/how-to-replace-the-activitys-fragment-from-the-fragment-itself/13217087
         ((MainActivity)getActivity()).replaceFragment("HomeSignedInFragment",false);

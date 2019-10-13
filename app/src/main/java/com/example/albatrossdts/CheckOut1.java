@@ -156,7 +156,7 @@ public class CheckOut1 extends Fragment {
     private void getDocumentData(String barcode_number) {
         //
         //Query the database for the barcode that has been input.
-        //If found, go to DeleteDocument2 fragment.
+        //If found, go to CheckOut2 fragment.
         //If not found, inform the user.
 
         db.collection("documents")

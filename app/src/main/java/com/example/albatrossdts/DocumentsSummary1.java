@@ -9,9 +9,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -42,6 +45,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -72,6 +76,7 @@ public class DocumentsSummary1 extends Fragment {
     private Button btnGenerateReport;
     private ProgressBar progressBar;
     private TextView txtStatus;
+    private EditText editTextEnterEmail; //This is only for the demo version
 
     //Firestore
     private FirebaseFirestore db;
@@ -126,17 +131,31 @@ public class DocumentsSummary1 extends Fragment {
         btnGenerateReport = view.findViewById(R.id.btnGenerateDocumentSummaryReport);
         progressBar = view.findViewById(R.id.determinateBar);
         txtStatus = view.findViewById(R.id.txtStatus);
+        editTextEnterEmail = view.findViewById(R.id.editTextEnterEmail);
+
 
 
         //Set onClickListener for generateReport button
         btnGenerateReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getEmployeeNames();
+                //Make the keyboard disappear. See https://stackoverflow.com/questions/4841228/after-type-in-edittext-how-to-make-keyboard-disappear
+                InputMethodManager mgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                mgr.hideSoftInputFromWindow(editTextEnterEmail.getWindowToken(), 0);
+                if (isValid(editTextEnterEmail.getText().toString())){
+                    getEmployeeNames();
+                }else {
+                    Toast.makeText(getContext(),"Please enter a valid email address.",Toast.LENGTH_LONG).show();
+                }
             }
         });
 
         return view;
+    }
+
+    private boolean isValid(String email) { //See https://www.tutorialspoint.com/validate-email-address-in-java
+        String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        return email.matches(regex);
     }
 
     private void getEmployeeNames() {
@@ -153,7 +172,9 @@ public class DocumentsSummary1 extends Fragment {
                                 Employee employee = document.toObject(Employee.class);
 
                                 if(!(employee.getUid()==null)) { //don't add any unauthenticated users to the list.
-                                    employees.put(employee.getUid(), employee.getFirst_name() + " " + employee.getLast_name() + " (" + employee.getEmail_address() + ")");
+                                    //The below commented out line should be the one used during production
+                                    //employees.put(employee.getUid(), employee.getFirst_name() + " " + employee.getLast_name() + " (" + employee.getEmail_address() + ")");
+                                    employees.put(employee.getUid(), employee.getFirst_name() + " " + employee.getLast_name());
                                 }
                             }
                             //Now that hashmap is populated, call generateReport() method
@@ -207,7 +228,7 @@ public class DocumentsSummary1 extends Fragment {
                             //Styling for title
                             XSSFCellStyle titleStyle = workbook.createCellStyle();
                             XSSFFont titleFont = workbook.createFont();
-                            titleFont.setFontHeightInPoints((short)20);
+                            titleFont.setFontHeightInPoints((short)16);
                             titleFont.setFontName("Segoe UI");
                             XSSFColor titleColor = new XSSFColor(Color.decode("#101b5c"));
                             titleFont.setColor(titleColor);
@@ -217,7 +238,7 @@ public class DocumentsSummary1 extends Fragment {
                             XSSFCell cell = row.createCell(0);
                             cell.setCellStyle(titleStyle);
                             //Add the title
-                            cell.setCellValue("Item Summary Report");
+                            cell.setCellValue("Item Summary Report - The data in this report is fictional and is for demonstration purposes.");//The explanation is for the demo version, need to remove for production.
 
                             //Set row position for writing next row
                             int rowPosition = 1;
@@ -372,6 +393,92 @@ public class DocumentsSummary1 extends Fragment {
 
                             }
 
+                            //The following code and the FOR loop below is for the demo version.
+                            //For production should remove it and uncomment above for loop
+
+                            /*Document document1 = new Document("100","Dewalt Drill","Dewalt DCD771C2 battery drill","Steel Cabinet","John Doe (jdoe@example.com)","Taken to site","1","https://firebasestorage.googleapis.com/v0/b/albatrossdts.appspot.com/o/images%2Fbattery-19983_640.jpg?alt=media&token=fa5408a1-8db3-480e-8d7a-8dd882fa84bd","Admin");
+                            Document document2 = new Document("101","Title Deed","Title for LR No. 1234/5","Filing Cabinet","Adam Smith (asmith@example.com)","To bank as security","2","https://firebasestorage.googleapis.com/v0/b/albatrossdts.appspot.com/o/images%2Fcertificate-154169_640.png?alt=media&token=b56bb8d9-23ec-485a-a3e3-7e18237e9b3c","Admin");
+                            Document document3 = new Document("102","Tablet","iPad Pro 2018","Safe","Jane Doe (janedoe@example.com)","For sales and marketing","3","https://firebasestorage.googleapis.com/v0/b/albatrossdts.appspot.com/o/images%2Fipad-147691_640.png?alt=media&token=0705789c-2647-4ef0-be4e-f681eb03cddf","Admin");
+                            ArrayList<Document> docs = new ArrayList<>();
+                            docs.add(document1);
+                            docs.add(document2);
+                            docs.add(document3);
+
+
+                            for (Document documentObject : docs) {
+                                count++;
+                                progressBar.setProgress((count/docs.size())*100);
+
+
+
+                                //Create a new row
+                                row = spreadsheet.createRow(rowPosition);
+
+                                //Styling
+                                XSSFCellStyle cellStyle = workbook.createCellStyle();
+                                cellStyle.setBorderLeft(BorderStyle.THIN);
+                                cellStyle.setBorderRight(BorderStyle.THIN);
+                                cellStyle.setBorderBottom(BorderStyle.THIN);
+                                XSSFFont cellFont = workbook.createFont();
+                                cellFont.setFontName("Segoe UI");
+                                cellFont.setFontHeightInPoints((short)12);
+                                cellStyle.setFont(cellFont);
+
+                                //First column data
+                                cell = row.createCell(0);
+                                cell.setCellValue(documentObject.getBarcode_number());
+                                cell.setCellStyle(cellStyle);
+
+                                //Second column data
+                                cell = row.createCell(1);
+                                cell.setCellValue(documentObject.getTitle());
+                                cell.setCellStyle(cellStyle);
+
+                                //Third column data
+                                cell = row.createCell(2);
+                                cell.setCellValue(documentObject.getDescription());
+                                cell.setCellStyle(cellStyle);
+
+                                //Fourth column data
+                                cell = row.createCell(3);
+                                cell.setCellValue(documentObject.getPermanent_location());
+                                cell.setCellStyle(cellStyle);
+
+                                //Fifth column data
+                                cell = row.createCell(4);
+                                cell.setCellValue(documentObject.getCurrently_checked_out_to());
+                                cell.setCellStyle(cellStyle);
+
+                                //Sixth column data
+                                cell = row.createCell(5);
+                                cell.setCellValue(documentObject.getPurpose());
+                                cell.setCellStyle(cellStyle);
+
+                                //Sixth column data (hyperlink)
+                                //Set styling for hyperlink
+                                CreationHelper createHelper = workbook.getCreationHelper();
+                                XSSFCellStyle hlinkstyle = workbook.createCellStyle();
+                                XSSFFont hlinkfont = workbook.createFont();
+                                hlinkfont.setUnderline(XSSFFont.U_SINGLE);
+                                hlinkfont.setColor(HSSFColor.HSSFColorPredefined.BLUE.getIndex());
+                                hlinkstyle.setFont(hlinkfont);
+                                hlinkstyle.setBorderLeft(BorderStyle.THIN);
+                                hlinkstyle.setBorderRight(BorderStyle.THIN);
+                                hlinkstyle.setBorderBottom(BorderStyle.THIN);
+
+                                cell = row.createCell(6);
+                                cell.setCellValue("Photo");
+                                XSSFHyperlink link = (XSSFHyperlink)createHelper.createHyperlink(HyperlinkType.URL);
+                                link.setAddress(documentObject.getPhoto_url());
+                                cell.setHyperlink(link);
+                                cell.setCellStyle(hlinkstyle);
+
+                                //Increment row
+                                rowPosition++;
+
+                            }*/
+
+
                             //Create file system using specific name
                             FileOutputStream out = null;
                             try {
@@ -480,7 +587,8 @@ public class DocumentsSummary1 extends Fragment {
             sender.sendMail("Item Summary Report",//TODO:Need to replace some of these with either string resources or something else not hardcoded.
                         body,
                         email,
-                        employeeSharedPref.getString("email_address",""),
+                        //employeeSharedPref.getString("email_address",""),
+                        editTextEnterEmail.getText().toString(),//For the demo version. In production, remove this and uncomment above line so that email goes to the signed-in user's email.
                         attachment,fileName);
                         Log.i("SendMail","Email sent successfully");
                 //Hide progress bar and update status

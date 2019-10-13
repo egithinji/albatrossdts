@@ -9,8 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,6 +25,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -76,6 +79,7 @@ public class DocumentsPerEmployee1 extends Fragment {
     private Button btnGenerate;
     private ProgressBar progressBar;
     private TextView txtStatus;
+    private EditText editTextEnterEmail; //This is only for the demo version
 
     //Firestore
     private FirebaseFirestore db;
@@ -140,10 +144,12 @@ public class DocumentsPerEmployee1 extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_documents_per_employee1, container, false);
 
+        //Instantiate views
         spinnerEmployee = view.findViewById(R.id.spinnerEmployee);
         btnGenerate = view.findViewById(R.id.btnGenerateDocumentsPerEmployeeReport);
         progressBar = view.findViewById(R.id.determinateBar);
         txtStatus = view.findViewById(R.id.txtStatus);
+        editTextEnterEmail = view.findViewById(R.id.editTextEnterEmail);
 
 
         //Disable btnGenerate until after employees are populated
@@ -161,13 +167,26 @@ public class DocumentsPerEmployee1 extends Fragment {
         btnGenerate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressBar.setVisibility(View.VISIBLE);
-                txtStatus.setVisibility(View.VISIBLE);
-                generateReport();
+                //Make the keyboard disappear. See https://stackoverflow.com/questions/4841228/after-type-in-edittext-how-to-make-keyboard-disappear
+                InputMethodManager mgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                mgr.hideSoftInputFromWindow(editTextEnterEmail.getWindowToken(), 0);
+
+                if (isValid(editTextEnterEmail.getText().toString())){
+                    progressBar.setVisibility(View.VISIBLE);
+                    txtStatus.setVisibility(View.VISIBLE);
+                    generateReport();
+                }else{
+                    Toast.makeText(getContext(),"Please enter a valid email address.",Toast.LENGTH_LONG).show();
+                }
             }
         });
 
         return view;
+    }
+
+    private boolean isValid(String email) { //See https://www.tutorialspoint.com/validate-email-address-in-java
+        String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        return email.matches(regex);
     }
 
     private void writeFirstPartOfSpreadsheet(){
@@ -184,7 +203,7 @@ public class DocumentsPerEmployee1 extends Fragment {
         //Styling for title
         XSSFCellStyle titleStyle = workbook.createCellStyle();
         XSSFFont titleFont = workbook.createFont();
-        titleFont.setFontHeightInPoints((short)20);
+        titleFont.setFontHeightInPoints((short)16);
         titleFont.setFontName("Segoe UI");
         XSSFColor titleColor = new XSSFColor(Color.decode("#101b5c"));
         titleFont.setColor(titleColor);
@@ -195,7 +214,7 @@ public class DocumentsPerEmployee1 extends Fragment {
         XSSFCell titleCell = row.createCell(0);
         titleCell.setCellStyle(titleStyle);
         //Add the title. Cell should be first in first row from declaration at beginning of class
-        titleCell.setCellValue("Items per Employee Report");
+        titleCell.setCellValue("Items per Employee Report - The data in this report is fictional and is for demonstration purposes.");
 
         //Jump to next row
         rowPosition++;
@@ -226,6 +245,7 @@ public class DocumentsPerEmployee1 extends Fragment {
         //Write the cell
         XSSFCell employeeNameCell = row.createCell(0);
         employeeNameCell.setCellValue("Employee: "+spinnerEmployee.getSelectedItem().toString());
+        //employeeNameCell.setCellValue("Employee: John Doe (jdoe@example.com)");//For demo. Remove and replace with commented line above for production.
         employeeNameCell.setCellStyle(styleEmployeeName);
 
 
@@ -284,8 +304,10 @@ public class DocumentsPerEmployee1 extends Fragment {
                     public void onComplete(@NonNull final Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
 
+                            //Commenting out below IF condition for demo. Needed in production
+
                             if(!(task.getResult().size()>0)) { //If no document found checked out to this user, just display toast and don't do the queries.
-                                Toast.makeText(getContext(), "No document currently checked out by this employee.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), "No item currently checked out by this employee.", Toast.LENGTH_LONG).show();
                                 getActivity().runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -295,7 +317,7 @@ public class DocumentsPerEmployee1 extends Fragment {
                                     }
                                 });
 
-                            }else{
+                            }else {
                                 //good tutorial here: https://www.tutorialspoint.com/apache_poi/index.htm
                                 writeFirstPartOfSpreadsheet();
 
@@ -303,11 +325,11 @@ public class DocumentsPerEmployee1 extends Fragment {
                                 int count = 0;
 
                                 for (final QueryDocumentSnapshot document : task.getResult()) {
-                                    /*
-                                    *For each document checked out by this employee, use the document's last_transaction_id to retrieve
-                                    * the transaction.
-                                    * From that transaction, get the barcode, document title, date, and purpose and add these to the spreadsheet.
-                                    * */
+                                 /*
+                                 *For each document checked out by this employee, use the document's last_transaction_id to retrieve
+                                 * the transaction.
+                                 * From that transaction, get the barcode, document title, date, and purpose and add these to the spreadsheet.
+                                 * */
 
                                     //For testing:
                                     Log.i(TAG,"Value of count: "+count);
@@ -413,6 +435,74 @@ public class DocumentsPerEmployee1 extends Fragment {
                                             });
                                 }
 
+                                //The following code is for the demo version.
+                                //For production should remove it and uncomment above for loop
+
+
+                                /*Transaction transaction1 = new Transaction("100", "Dewalt Drill", "1", "John Doe (jdoe@example.com)", "Check-out", "Taken to site", Timestamp.now());
+
+
+                                //Increment count and update progress bar
+                                count++;
+                                progressBar.setProgress((count / 1) * 100); //I know this makes no sense, it's just for the demo version to ensure the progress bar makes an appearance
+
+                                //Create a new row
+                                XSSFRow row = spreadsheet.createRow(rowPosition);
+
+                                //Styling
+                                XSSFCellStyle cellStyle = workbook.createCellStyle();
+                                cellStyle.setBorderLeft(BorderStyle.THIN);
+                                cellStyle.setBorderRight(BorderStyle.THIN);
+                                cellStyle.setBorderBottom(BorderStyle.THIN);
+                                XSSFFont cellFont = workbook.createFont();
+                                cellFont.setFontName("Segoe UI");
+                                cellFont.setFontHeightInPoints((short) 12);
+                                cellStyle.setFont(cellFont);
+
+                                XSSFCell cell;
+
+                                //First column data
+                                cell = row.createCell(0);
+                                cell.setCellValue(transaction1.getBarcode_number());
+                                cell.setCellStyle(cellStyle);
+
+                                //Second column data
+                                cell = row.createCell(1);
+                                cell.setCellValue(transaction1.getDocument_title());
+                                cell.setCellStyle(cellStyle);
+
+                                //Third column data
+                                //This is the date
+
+                                cell = row.createCell(2);
+                                cell.setCellValue("01 October 2019 09:00");
+                                cell.setCellStyle(cellStyle);
+
+                                //Fourth column data
+                                cell = row.createCell(3);
+                                cell.setCellValue(transaction1.getPurpose());
+                                cell.setCellStyle(cellStyle);
+
+                                //Create file using specific name
+                                File file = new File(getContext().getExternalFilesDir(null), "createworkbook.xlsx");
+                                FileOutputStream out = null;
+                                try {
+                                    out = new FileOutputStream(file);
+                                    //write operation workbook using file out object
+                                    workbook.write(out);
+                                    out.close();
+                                    Log.i(TAG, "Created file: " + file.getPath());
+                                    //workbook = new XSSFWorkbook();
+
+                                    //Update status message
+                                    txtStatus.setText("Sending report via email...");
+                                    numberOfLoops = 0;//Reset numberOfLoops and rowPosition incase user generates another report
+                                    rowPosition = 0;
+                                    getEmail(file.getPath()); //getEmail kicks off the process that results in an email being sent using the approved email credentials from the database.
+
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }*/
                             }
 
                         } else {
@@ -499,7 +589,8 @@ public class DocumentsPerEmployee1 extends Fragment {
             sender.sendMail("Items per Employee Report",//TODO:Need to replace some of these with either string resources or something else not hardcoded.
                     body,
                     MainActivity.EMAIL_ADDRESS,
-                    employeeSharedPref.getString("email_address",""),
+                    //employeeSharedPref.getString("email_address",""),
+                    editTextEnterEmail.getText().toString(),//For the demo version. In production, remove this and uncomment above line so that email goes to the signed-in user's email.
                     attachment,fileName);
             Log.i("SendMail","Email sent successfully");
 
@@ -540,14 +631,23 @@ public class DocumentsPerEmployee1 extends Fragment {
         //Get the employees from the employeeObjects (created at app startup) and update adapter with employee names
         //Also update the hashmap with employee names/ employee uid
 
+
         for(Employee e: MainActivity.employeeObjects){
             //Add entry to employee HashMap. The key is their name plus email address in brackets. The value is their uid.
             //This is to enable the user to uniquely identify the user, in case there is more than one person with the same first and last name.
             //The UID is used when querying the database for documents checked out by the specific employee.
-            employees.put(e.getFirst_name() + " " + e.getLast_name() + " (" + e.getEmail_address() + ")", e.getUid());
-            //Update the adapter
-            adapter.add(e.getFirst_name()+" "+e.getLast_name()+" ("+e.getEmail_address()+")");
+            //employees.put(e.getFirst_name() + " " + e.getLast_name() + " (" + e.getEmail_address() + ")", e.getUid());
+
+
+       //The following IF condition is for the demo. Not needed for production
+            if(e.getFirst_name().equals("User")){
+                employees.put(e.getFirst_name() + " " + e.getLast_name(), e.getUid());
+                //Update the adapter
+                adapter.add(e.getFirst_name()+" "+e.getLast_name());
+            }
+
         }
+
         btnGenerate.setEnabled(true);
 
     }

@@ -9,15 +9,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -38,6 +42,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -67,6 +72,7 @@ public class TransactionsSummary1 extends Fragment {
     private Button btnGenerateReport;
     private ProgressBar progressBar;
     private TextView txtStatus;
+    private EditText editTextEnterEmail; //This is only for the demo version
 
     //Firestore
     private FirebaseFirestore db;
@@ -117,23 +123,40 @@ public class TransactionsSummary1 extends Fragment {
         btnGenerateReport = view.findViewById(R.id.btnTransactionsSummaryReport);
         progressBar = view.findViewById(R.id.determinateBar);
         txtStatus = view.findViewById(R.id.txtStatus);
+        editTextEnterEmail = view.findViewById(R.id.editTextEnterEmail);
 
 
         //Set onClickListener for generateReport button
         btnGenerateReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    progressBar.setVisibility(View.VISIBLE);
-                    txtStatus.setVisibility(View.VISIBLE);
-                    generateReport();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                //Make the keyboard disappear. See https://stackoverflow.com/questions/4841228/after-type-in-edittext-how-to-make-keyboard-disappear
+                InputMethodManager mgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                mgr.hideSoftInputFromWindow(editTextEnterEmail.getWindowToken(), 0);
+
+                if(isValid(editTextEnterEmail.getText().toString())){
+                    try {
+                        progressBar.setVisibility(View.VISIBLE);
+                        txtStatus.setVisibility(View.VISIBLE);
+                        generateReport();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else {
+                    Toast.makeText(getContext(),"Please enter a valid email address.",Toast.LENGTH_LONG).show();
                 }
+
+
+
             }
         });
 
         return view;
+    }
+
+    private boolean isValid(String email) { //See https://www.tutorialspoint.com/validate-email-address-in-java
+        String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        return email.matches(regex);
     }
 
     private void generateReport() throws IOException{
@@ -172,7 +195,7 @@ public class TransactionsSummary1 extends Fragment {
                             //Styling for title
                             XSSFCellStyle titleStyle = workbook.createCellStyle();
                             XSSFFont titleFont = workbook.createFont();
-                            titleFont.setFontHeightInPoints((short)20);
+                            titleFont.setFontHeightInPoints((short)16);
                             titleFont.setFontName("Segoe UI");
                             XSSFColor titleColor = new XSSFColor(Color.decode("#101b5c"));
                             titleFont.setColor(titleColor);
@@ -182,7 +205,7 @@ public class TransactionsSummary1 extends Fragment {
                             XSSFCell cell = row.createCell(0);
                             cell.setCellStyle(titleStyle);
                             //Add the title
-                            cell.setCellValue("Transactions Summary Report");
+                            cell.setCellValue("Transactions Summary Report- The data in this report is fictional and is for demonstration purposes.");
 
                             //Set row position for writing next row
                             int rowPosition = 1;
@@ -418,7 +441,8 @@ public class TransactionsSummary1 extends Fragment {
             sender.sendMail("Transactions Summary Report",//TODO:Need to replace some of these with either string resources or something else not hardcoded.
                     body,
                     MainActivity.EMAIL_ADDRESS,
-                    employeeSharedPref.getString("email_address",""),
+                    //employeeSharedPref.getString("email_address",""),
+                    editTextEnterEmail.getText().toString(),//For the demo version. In production, remove this and uncomment above line so that email goes to the signed-in user's email.
                     attachment,fileName);
             Log.i("SendMail","Email sent successfully");
 

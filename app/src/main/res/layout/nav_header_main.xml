@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/nav_header_title"
-        android:text="Barcode Tracking System v.1.0"
+        android:text="Albatross v.1.0 Demo"
         android:textColor="@color/colorAccent"
         android:layout_gravity="left"
         android:textSize="20sp"

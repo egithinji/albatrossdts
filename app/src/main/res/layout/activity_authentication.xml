@@ -37,7 +37,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginLeft="28dp"
         android:layout_marginTop="68dp"
-        android:text="Authentication error. Please contact the administrator."
+        android:text="Authentication error. Please send a request for your email addresses to be activated to info@albatross.africa."
         android:textSize="16sp"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"

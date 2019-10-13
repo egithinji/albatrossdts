@@ -29,8 +29,8 @@
 
         <TextView
             android:id="@+id/txtBarcodeScan"
-            android:layout_width="252dp"
-            android:layout_height="32dp"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="36dp"
             android:text="Barcode number:"

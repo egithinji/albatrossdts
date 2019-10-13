@@ -190,6 +190,7 @@ public class AddNewDocument4 extends Fragment {
                     }else{
                         //The barcode number is unique. Submit
                         submit();
+                        //demoAdd();
                     }
 
                 }else{
@@ -197,6 +198,13 @@ public class AddNewDocument4 extends Fragment {
                 }
             }
         });
+    }
+
+    //For the demo version of the app. Make it appear like the action was performed but don't alter the database
+    private void demoAdd(){
+
+        getEmail(); //getEmail kicks off the process that results in an email being sent using the approved email credentials from the database.
+
     }
 
     private void submit() {
@@ -357,6 +365,7 @@ public class AddNewDocument4 extends Fragment {
             clearSharedPreferences();
 
 
+
             //Go back to first fragment of Add New Document to allow addition of new document.
             goToBeginning();
 
@@ -375,6 +384,18 @@ public class AddNewDocument4 extends Fragment {
     }
 
     private void goToBeginning() {
+
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                //Display Toast
+                Toast.makeText(getContext(),"Item submitted successfully.",Toast.LENGTH_LONG).show();
+            }
+        });
+
+        //Make progress bar invisible
+        progressBar.setVisibility(View.INVISIBLE);
+
         ((MainActivity)getActivity()).replaceFragment("AddNewDocument1",false); //We don't want the user to click back and come back here.
     }
 

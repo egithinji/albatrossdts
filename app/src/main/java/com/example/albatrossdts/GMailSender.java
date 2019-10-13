@@ -64,6 +64,8 @@ public class GMailSender extends javax.mail.Authenticator {
     //Modified to handle attachments as per https://github.com/raguilera82/send-mail-cordova-plugin/blob/master/src/android/GMailSender.java
 
     public synchronized void sendMail(String subject, String body, String sender, String recipients, String attachment, String fileName) throws Exception {
+        Log.i(TAG,"Sending email to: "+recipients);
+
         // The message object
         MimeMessage message = new MimeMessage(session);
 

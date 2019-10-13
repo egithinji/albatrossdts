@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Enter the item's barcode number: "
+        android:text="Enter the item's barcode number:"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -43,6 +43,30 @@
         app:layout_constraintTop_toBottomOf="@id/txtDocument"
         android:fontFamily="@font/montserratlight"/>
 
+    <!-- The below textview and edittext are only for the demo version of the app -->
+
+    <TextView
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email address to send the report to:"
+        android:textColor="@color/colorPrimary"
+        android:fontFamily="@font/montserratlight"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDocument"
+        android:id="@+id/txtEmail"
+        />
+
+    <EditText
+        android:layout_marginLeft="10dp"
+        android:id="@+id/editTextEnterEmail"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/txtEmail"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:fontFamily="@font/montserratlight"
+        />
+
     <Button
         android:id="@+id/btnTransactionsByDocumentReport"
         android:layout_width="142dp"
@@ -52,7 +76,7 @@
         android:text="Generate Report"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDocument"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEnterEmail"
         android:fontFamily="@font/montserratlight"/>
 
     <ProgressBar

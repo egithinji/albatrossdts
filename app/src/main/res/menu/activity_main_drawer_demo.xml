@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home_icon"
+            android:title="Home"
+            />
+
+        <item android:title="Activities">
+            <menu>
+                <item
+                    android:id="@+id/nav_action1"
+                    android:icon="@drawable/checkin"
+                    android:title="Check in" />
+                <item
+                    android:id="@+id/nav_action2"
+                    android:icon="@drawable/checkout"
+                    android:title="Check out" />
+                <item
+                    android:id="@+id/nav_action3"
+                    android:icon="@drawable/newicon"
+                    android:title="Add new" />
+                <item
+                    android:id="@+id/nav_action4"
+                    android:icon="@drawable/deleteicon"
+                    android:title="Delete" />
+            </menu>
+        </item>
+
+        <item android:title="Reports">
+            <menu>
+                <item
+                    android:id="@+id/nav_report1"
+                    android:icon="@drawable/reporticon"
+                    android:title="Item Summary" />
+                <item
+                    android:id="@+id/nav_report2"
+                    android:icon="@drawable/reporticon"
+                    android:title="Items per Employee" />
+                <item
+                    android:id="@+id/nav_report3"
+                    android:icon="@drawable/reporticon"
+                    android:title="@string/menu_report3" />
+                <item
+                    android:id="@+id/nav_report4"
+                    android:icon="@drawable/reporticon"
+                    android:title="Transactions by Item" />
+            </menu>
+        </item>
+
+        <item android:title="Communicte">
+            <menu>
+                <item
+                    android:id="@+id/nav_contact_us"
+                    android:icon="@drawable/email"
+                    android:title="Contact Us"
+                    />
+            </menu>
+
+
+
+        </item>
+
+    </group>
+
+</menu>

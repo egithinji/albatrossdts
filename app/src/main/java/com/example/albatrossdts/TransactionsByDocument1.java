@@ -73,6 +73,7 @@ public class TransactionsByDocument1 extends Fragment {
     private ProgressBar progressBar;
     private TextView txtStatus;
     private EditText editTextDocument;
+    private EditText editTextEnterEmail; //This is only for the demo version
 
     //Firestore
     private FirebaseFirestore db;
@@ -128,6 +129,7 @@ public class TransactionsByDocument1 extends Fragment {
         progressBar = view.findViewById(R.id.determinateBar);
         txtStatus = view.findViewById(R.id.txtStatus);
         editTextDocument = view.findViewById(R.id.editTextDocument);
+        editTextEnterEmail = view.findViewById(R.id.editTextEnterEmail);
 
         //Onclick for btnGenerate
         btnGenerate.setOnClickListener(new View.OnClickListener() {
@@ -138,12 +140,19 @@ public class TransactionsByDocument1 extends Fragment {
                 if(editTextDocument.getText().toString().equals("")) {
                     editTextDocument.setBackgroundResource(R.drawable.edit_text_error);
                 }else {
-                    //Make the keyboard disappear. See https://stackoverflow.com/questions/4841228/after-type-in-edittext-how-to-make-keyboard-disappear
-                    InputMethodManager mgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    mgr.hideSoftInputFromWindow(editTextDocument.getWindowToken(), 0);
-                    progressBar.setVisibility(View.VISIBLE);
-                    txtStatus.setVisibility(View.VISIBLE);
-                    getDocumentTitles();//this will load document barcodes and titles into a hashmap then launch the getBarcodes method
+
+                    if(isValid(editTextEnterEmail.getText().toString())){
+                        //Make the keyboard disappear. See https://stackoverflow.com/questions/4841228/after-type-in-edittext-how-to-make-keyboard-disappear
+                        InputMethodManager mgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        mgr.hideSoftInputFromWindow(editTextDocument.getWindowToken(), 0);
+                        progressBar.setVisibility(View.VISIBLE);
+                        txtStatus.setVisibility(View.VISIBLE);
+                        getDocumentTitles();//this will load document barcodes and titles into a hashmap then launch the getBarcodes method
+
+                    }else{
+                        Toast.makeText(getContext(),"Please enter a valid email address.",Toast.LENGTH_LONG).show();
+                    }
+
                 }
             }
         });
@@ -159,6 +168,12 @@ public class TransactionsByDocument1 extends Fragment {
 
         return view;
     }
+
+    private boolean isValid(String email) { //See https://www.tutorialspoint.com/validate-email-address-in-java
+        String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        return email.matches(regex);
+    }
+
 
     private void getDocumentTitles(){
         //Needed to get the title of the document that the user searches for.
@@ -498,7 +513,8 @@ public class TransactionsByDocument1 extends Fragment {
             sender.sendMail("Transactions By Item Report",//TODO:Need to replace some of these with either string resources or something else not hardcoded.
                     body,
                     MainActivity.EMAIL_ADDRESS,
-                    employeeSharedPref.getString("email_address",""),
+                    //employeeSharedPref.getString("email_address",""),
+                    editTextEnterEmail.getText().toString(),//For the demo version. In production, remove this and uncomment above line so that email goes to the signed-in user's email.
                     attachment,fileName);
             Log.i("SendMail","Email sent successfully");
 
