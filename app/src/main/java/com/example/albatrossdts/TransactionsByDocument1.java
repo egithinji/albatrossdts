@@ -217,7 +217,7 @@ public class TransactionsByDocument1 extends Fragment {
                         if (task.isSuccessful()) {
 
                             if(!(task.getResult().size()>0)) { //If no transaction found with that barcode just display toast and don't do the queries.
-                                Toast.makeText(getContext(), "Document with that barcode not found.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), "Item with that barcode not found.", Toast.LENGTH_LONG).show();
                                 progressBar.setVisibility(View.INVISIBLE);
                                 txtStatus.setVisibility(View.INVISIBLE);
                             }else{
@@ -327,9 +327,9 @@ public class TransactionsByDocument1 extends Fragment {
         //Styling for title
         XSSFCellStyle titleStyle = workbook.createCellStyle();
         XSSFFont titleFont = workbook.createFont();
-        titleFont.setFontHeightInPoints((short)20);
+        titleFont.setFontHeightInPoints((short)16);
         titleFont.setFontName("Segoe UI");
-        XSSFColor titleColor = new XSSFColor(Color.decode("#101b5c"));
+        XSSFColor titleColor = new XSSFColor(Color.decode("#613717"));
         titleFont.setColor(titleColor);
         titleStyle.setFont(titleFont);
 
@@ -370,7 +370,7 @@ public class TransactionsByDocument1 extends Fragment {
 
         //Styling for barcode number and document title (values)
         XSSFCellStyle styleValues = workbook.createCellStyle();
-        XSSFColor valuesColor = new XSSFColor(Color.decode("#101b5c"));
+        XSSFColor valuesColor = new XSSFColor(Color.decode("#613717"));
         XSSFFont valuesFont = workbook.createFont();
         valuesFont.setFontName("Segoe UI");
         valuesFont.setFontHeightInPoints((short)14);

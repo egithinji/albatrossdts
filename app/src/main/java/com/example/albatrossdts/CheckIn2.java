@@ -169,6 +169,7 @@ public class CheckIn2 extends Fragment {
 
                                 Document doc = qds.toObject(Document.class);
                                 if(doc.getCurrently_checked_out_to()==null){//If document already checked in, notify user and don't do anything else.
+
                                     Toast.makeText(getContext(),"Item already checked in at "+doc.getPermanent_location(),Toast.LENGTH_LONG).show();
                                     progressBar.setVisibility(View.INVISIBLE);
                                     ((MainActivity)getActivity()).replaceFragment("CheckIn1",false);
@@ -253,10 +254,9 @@ public class CheckIn2 extends Fragment {
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        progressBar.setVisibility(View.INVISIBLE);
-                                        Toast.makeText(getContext(),"Item checked in.",Toast.LENGTH_LONG).show();
+
                                         getEmail(); //getEmail kicks off the process that results in an email being sent using the approved email credentials from the database.
-                                        launchNextFragment();
+
                                     }
                                 });
 
@@ -274,6 +274,10 @@ public class CheckIn2 extends Fragment {
 
     private void launchNextFragment() {
         //Replaces the fragment in the frame_layout in app_bar_main.xml
+
+        clearSharedPreferences();
+
+        progressBar.setVisibility(View.INVISIBLE);
 
         //See solution at https://stackoverflow.com/questions/13216916/how-to-replace-the-activitys-fragment-from-the-fragment-itself/13217087
         ((MainActivity)getActivity()).replaceFragment("HomeSignedInFragment",false);
@@ -350,6 +354,18 @@ public class CheckIn2 extends Fragment {
                     null);
             Log.i("SendMail","Email sent successfully");
             clearSharedPreferences();
+
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    progressBar.setVisibility(View.INVISIBLE);
+                    Toast.makeText(getContext(),"Well done! Item checked in.",Toast.LENGTH_LONG).show();
+                }
+            });
+
+            launchNextFragment();
+
+
         } catch (Exception e) {
             Log.e("SendMail", e.getMessage(), e);
             Log.i("SendMail","Error occurred sending email.");
@@ -361,7 +377,8 @@ public class CheckIn2 extends Fragment {
 
     private void clearSharedPreferences(){
         //Clear the shared preferences
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        SharedPreferences scannerSharedPreferences = getActivity().getSharedPreferences("DocumentData",0);
+        SharedPreferences.Editor editor = scannerSharedPreferences.edit();
         editor.clear();
         editor.commit();
     }

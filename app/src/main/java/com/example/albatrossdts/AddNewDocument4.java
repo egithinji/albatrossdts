@@ -200,12 +200,6 @@ public class AddNewDocument4 extends Fragment {
         });
     }
 
-    //For the demo version of the app. Make it appear like the action was performed but don't alter the database
-    private void demoAdd(){
-
-        getEmail(); //getEmail kicks off the process that results in an email being sent using the approved email credentials from the database.
-
-    }
 
     private void submit() {
 
@@ -266,9 +260,6 @@ public class AddNewDocument4 extends Fragment {
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        //Display Toast
-                                        Toast.makeText(getContext(),"Item submitted successfully.",Toast.LENGTH_LONG).show();
-
                                         getEmail(); //getEmail kicks off the process that results in an email being sent using the approved email credentials from the database.
                                     }
                                 });
@@ -381,22 +372,27 @@ public class AddNewDocument4 extends Fragment {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.clear();
         editor.commit();
+
+        SharedPreferences scannerSharedPref = getActivity().getSharedPreferences("DocumentData",0);
+        editor = scannerSharedPref.edit();
+        editor.clear();
+        editor.commit();
     }
 
-    private void goToBeginning() {
+    private void goToBeginning() {//For the demo, I want the user to go to the home page, not the first fragment for adding an item.
 
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 //Display Toast
-                Toast.makeText(getContext(),"Item submitted successfully.",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),"Well done! Item submitted successfully.",Toast.LENGTH_LONG).show();
             }
         });
 
         //Make progress bar invisible
         progressBar.setVisibility(View.INVISIBLE);
 
-        ((MainActivity)getActivity()).replaceFragment("AddNewDocument1",false); //We don't want the user to click back and come back here.
+        ((MainActivity)getActivity()).replaceFragment("HomeSignedInFragment",false); //We don't want the user to click back and come back here.
     }
 
     private Document getDocumentFromSharedPreferences() {

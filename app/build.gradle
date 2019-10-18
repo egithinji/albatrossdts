@@ -1,11 +1,12 @@
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.1"
     defaultConfig {
         applicationId "com.example.albatrossdts"
-        minSdkVersion 16
+        minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -33,7 +34,7 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     // Add the Firebase SDK for Google Analytics
-    implementation 'com.google.firebase:firebase-analytics:17.1.0'
+    implementation 'com.google.firebase:firebase-analytics:17.2.0'
     implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
     //Firebase authentication
     implementation 'com.google.firebase:firebase-auth:19.0.0'
@@ -56,7 +57,8 @@ dependencies {
     //Image compression
     implementation 'id.zelory:compressor:2.1.0'
     implementation files('libs/poishadow-all.jar')
+    //Chrashlytics
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 }
 
 apply plugin: 'com.google.gms.google-services'  // Google Play services Gradle plugin
-

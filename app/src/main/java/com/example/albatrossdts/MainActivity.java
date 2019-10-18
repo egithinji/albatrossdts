@@ -429,39 +429,9 @@ public class MainActivity extends AppCompatActivity
 
     private void checkIfCurrentUserSignedIn(){
 
-        loadDemoUser();//This is for the demo app on the playstore. Remove this method and uncomment below for production versions.
+        loadDemoUser();//This is for the demo app on the playstore.
 
-        /*FirebaseUser user = mAuth.getCurrentUser();
 
-        if (user != null) {
-            // User is signed in.
-
-            replaceFragment(getNameOfFragmentToLoad(),false);
-
-            //Check shared preferences to see if this user is admin.
-            //Adjust the MENU_ID accordingly
-
-            //Get user data from shared preferences
-            SharedPreferences sharedPref = getSharedPreferences("EmployeeData",0);
-
-            String group = sharedPref.getString("group","");
-            if(group.equals("Administrator")){
-                MENU_ID = R.menu.activity_main_drawer_admin;
-            }else if(group.equals("Reviewer")){
-                MENU_ID = R.menu.activity_main_drawer_reviewer;
-            }else if(group.equals("Demo")){
-                MENU_ID = R.menu.activity_main_drawer_demo; //This should only be there for the demo version of the app
-            }
-            else{
-                MENU_ID = R.menu.activity_main_drawer;
-            }
-
-        } else {
-            // User not signed in.
-
-            //Set the menu to the signedout menu
-            MENU_ID = R.menu.activity_main_drawer_signedout;
-        }*/
     }
 
     private void loadDemoUser() {

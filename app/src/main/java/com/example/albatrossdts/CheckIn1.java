@@ -134,7 +134,7 @@ public class CheckIn1 extends Fragment {
         scannerSharedPreferences = getContext().getSharedPreferences("DocumentData",0);
         if(!scannerSharedPreferences.getString("barcode_number","").equals("")){
             //coming from scanning
-            getDocumentData(scannerSharedPreferences.getString("barcode_number",""));
+            getDocumentData(scannerSharedPreferences.getString("barcode_number",""),getContext());
         }
 
 
@@ -192,7 +192,7 @@ public class CheckIn1 extends Fragment {
         }
     }
 
-    private void getDocumentData(String barcode_number) {
+    private void getDocumentData(String barcode_number, final Context mContext) {
         //
         //Query the database for the barcode that has been input.
         //If found, go to CheckIn2 fragment.
@@ -220,9 +220,9 @@ public class CheckIn1 extends Fragment {
                                     editor.commit();
 
                                     //Clear the DocumentData shared preference
-                                    editor = scannerSharedPreferences.edit();
-                                    editor.clear();
-                                    editor.commit();
+                                    //editor = scannerSharedPreferences.edit();
+                                    //editor.clear();
+                                    //editor.commit();
 
                                     populateViews();
 
@@ -231,7 +231,9 @@ public class CheckIn1 extends Fragment {
 
                             }else{
                                 //Document not found
-                                Toast.makeText(getContext(),"No item found with that barcode number.",Toast.LENGTH_LONG).show();
+
+                                Toast.makeText(mContext,"No item found with that barcode number.",Toast.LENGTH_LONG).show();
+                                clearScannerSharedPreferences(mContext);
 
                             }
 
@@ -275,11 +277,12 @@ public class CheckIn1 extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-        clearScannerSharedPreferences();//So that when we come back it doesn't think it's come from scanning
+        //clearScannerSharedPreferences();//So that when we come back it doesn't think it's come from scanning
     }
 
-    private void clearScannerSharedPreferences(){
+    private void clearScannerSharedPreferences(Context mContext){
         //Clear the scanner shared preferences
+        SharedPreferences scannerSharedPreferences = mContext.getSharedPreferences("DocumentData",0);
         SharedPreferences.Editor editor = scannerSharedPreferences.edit();
         editor.clear();
         editor.commit();

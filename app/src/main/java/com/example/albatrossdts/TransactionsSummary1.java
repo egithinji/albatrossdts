@@ -197,7 +197,7 @@ public class TransactionsSummary1 extends Fragment {
                             XSSFFont titleFont = workbook.createFont();
                             titleFont.setFontHeightInPoints((short)16);
                             titleFont.setFontName("Segoe UI");
-                            XSSFColor titleColor = new XSSFColor(Color.decode("#101b5c"));
+                            XSSFColor titleColor = new XSSFColor(Color.decode("#613717"));
                             titleFont.setColor(titleColor);
                             titleStyle.setFont(titleFont);
 
@@ -205,7 +205,7 @@ public class TransactionsSummary1 extends Fragment {
                             XSSFCell cell = row.createCell(0);
                             cell.setCellStyle(titleStyle);
                             //Add the title
-                            cell.setCellValue("Transactions Summary Report- The data in this report is fictional and is for demonstration purposes.");
+                            cell.setCellValue("Transactions Summary Report");
 
                             //Set row position for writing next row
                             int rowPosition = 1;

@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ import com.google.firebase.firestore.QuerySnapshot;
  */
 public class CheckOut1 extends Fragment {
     private static final int MY_CAMERA_REQUEST_CODE = 100;
+    private static final String TAG = "CheckOut1";
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     //private static final String ARG_PARAM1 = "param1";
@@ -94,7 +96,7 @@ public class CheckOut1 extends Fragment {
             //mParam1 = getArguments().getString(ARG_PARAM1);
             //mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        sharedPreferences = getContext().getSharedPreferences("CheckOutDocumentData",0);
+
 
         //Initiate firestore instance
         db = FirebaseFirestore.getInstance();
@@ -129,14 +131,18 @@ public class CheckOut1 extends Fragment {
                 goNext();
             }
         });
-        
+        sharedPreferences = getContext().getSharedPreferences("CheckOutDocumentData",0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.commit();
+
         //If we have come from scanning, fill shared preferences with data about the scanned document from the database
         // and populate the views with the data.
         //We know we've come from scanning by checking the documentdata shared preference
-        scannerSharedPreferences = getContext().getSharedPreferences("DocumentData",0);
+        scannerSharedPreferences = getActivity().getSharedPreferences("DocumentData",0);
         if(!scannerSharedPreferences.getString("barcode_number","").equals("")){
             //coming from scanning
-            getDocumentData(scannerSharedPreferences.getString("barcode_number", ""));
+            getDocumentData(scannerSharedPreferences.getString("barcode_number", ""), getContext());
         }
 
         return view;
@@ -153,7 +159,7 @@ public class CheckOut1 extends Fragment {
         ((MainActivity)getActivity()).replaceFragment("CheckOut2",true);
     }
 
-    private void getDocumentData(String barcode_number) {
+    private void getDocumentData(String barcode_number, final Context mContext) {
         //
         //Query the database for the barcode that has been input.
         //If found, go to CheckOut2 fragment.
@@ -181,9 +187,9 @@ public class CheckOut1 extends Fragment {
                                     editor.commit();
 
                                     //Clear the DocumentData shared preference
-                                    editor = scannerSharedPreferences.edit();
-                                    editor.clear();
-                                    editor.commit();
+                                    //editor = scannerSharedPreferences.edit();
+                                    //editor.clear();
+                                    //editor.commit();
 
                                     populateViews();
 
@@ -192,7 +198,9 @@ public class CheckOut1 extends Fragment {
 
                             }else{
                                 //Document not found
-                                Toast.makeText(getContext(),"No item found with that barcode number.",Toast.LENGTH_LONG).show();
+
+                                Toast.makeText(mContext, "No item found with that barcode number.", Toast.LENGTH_LONG).show();
+                                clearScannerSharedPreferences(mContext);
 
                             }
 
@@ -205,6 +213,7 @@ public class CheckOut1 extends Fragment {
     }
 
     private void populateViews() {
+        Log.i(TAG,"Populating views");
         txtBarcodeNumber.setText("Barcode number: "+sharedPreferences.getString("document_barcode_number",""));
         txtDocumentTitle.setText("Document title: "+sharedPreferences.getString("document_title",""));
         txtDocumentDescription.setText("Document description: "+sharedPreferences.getString("document_description",""));
@@ -277,12 +286,13 @@ public class CheckOut1 extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-        clearScannerSharedPreferences();//So that when we come back it doesn't think it's come from scanning
+        //clearScannerSharedPreferences();//So that when we come back it doesn't think it's come from scanning
     }
 
 
-    private void clearScannerSharedPreferences(){
+    private void clearScannerSharedPreferences(Context mContext){
         //Clear the scanner shared preferences
+        SharedPreferences scannerSharedPreferences = mContext.getSharedPreferences("DocumentData",0);
         SharedPreferences.Editor editor = scannerSharedPreferences.edit();
         editor.clear();
         editor.commit();

@@ -108,9 +108,9 @@ public class AddNewDocument3 extends Fragment {
         editor.commit();
 
         //Clear the DocumentData shared preference
-        editor = scannerSharedPref.edit();
-        editor.clear();
-        editor.commit();
+        //editor = scannerSharedPref.edit();
+        //editor.clear();
+        //editor.commit();
 
 
         txtBarcodeNumber.setText("Barcode number: "+sharedPref.getString("barcode_number",""));

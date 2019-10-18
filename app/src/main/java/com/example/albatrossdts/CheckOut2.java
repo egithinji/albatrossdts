@@ -308,10 +308,8 @@ public class CheckOut2 extends Fragment {
                         documentRef.update("last_transaction_id",documentReference.getId()).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                progressBar.setVisibility(View.INVISIBLE);
-                                Toast.makeText(getContext(),"Item checked out.",Toast.LENGTH_LONG).show();
                                 getEmail(); //getEmail kicks off the process that results in an email being sent using the approved email credentials from the database.
-                                launchNextFragment();
+                                //launchNextFragment();
                             }
                         });
 
@@ -347,7 +345,17 @@ public class CheckOut2 extends Fragment {
                     null,
                     null);
             Log.i("SendMail","Email sent successfully");
-            clearSharedPreferences();
+
+
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    progressBar.setVisibility(View.INVISIBLE);
+                    //Display Toast
+                    Log.i(TAG,"Displaying toast.");
+                    Toast.makeText(getActivity(),"Fantastic! Item checked out.",Toast.LENGTH_LONG).show();
+                }
+            });
 
             launchNextFragment();
 
@@ -413,21 +421,21 @@ public class CheckOut2 extends Fragment {
 
     private void clearSharedPreferences(){
         //Clear the shared preferences
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        //SharedPreferences.Editor editor = sharedPreferences.edit();
+        //editor.clear();
+        //editor.commit();
+
+        SharedPreferences scannerSharedPreferences = getActivity().getSharedPreferences("DocumentData",0);
+        SharedPreferences.Editor editor = scannerSharedPreferences.edit();
         editor.clear();
         editor.commit();
+
     }
 
     private void launchNextFragment() {
         //Replaces the fragment in the frame_layout in app_bar_main.xml
 
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                //Display Toast
-                Toast.makeText(getContext(),"Item checked out.",Toast.LENGTH_LONG).show();
-            }
-        });
+        clearSharedPreferences();
 
         progressBar.setVisibility(View.INVISIBLE);
 

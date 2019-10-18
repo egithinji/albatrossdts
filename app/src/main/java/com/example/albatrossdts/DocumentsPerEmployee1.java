@@ -205,7 +205,7 @@ public class DocumentsPerEmployee1 extends Fragment {
         XSSFFont titleFont = workbook.createFont();
         titleFont.setFontHeightInPoints((short)16);
         titleFont.setFontName("Segoe UI");
-        XSSFColor titleColor = new XSSFColor(Color.decode("#101b5c"));
+        XSSFColor titleColor = new XSSFColor(Color.decode("#613717"));
         titleFont.setColor(titleColor);
         titleStyle.setFont(titleFont);
 
@@ -214,7 +214,7 @@ public class DocumentsPerEmployee1 extends Fragment {
         XSSFCell titleCell = row.createCell(0);
         titleCell.setCellStyle(titleStyle);
         //Add the title. Cell should be first in first row from declaration at beginning of class
-        titleCell.setCellValue("Items per Employee Report - The data in this report is fictional and is for demonstration purposes.");
+        titleCell.setCellValue("Items per Employee Report");
 
         //Jump to next row
         rowPosition++;

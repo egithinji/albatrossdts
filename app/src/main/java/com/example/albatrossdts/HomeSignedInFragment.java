@@ -79,9 +79,14 @@ public class HomeSignedInFragment extends Fragment {
         btnHelp = view.findViewById(R.id.btnHelp);
 
         //Username should be captured in mUsername
-        txtWelcome.setText("Thanks for installing the Albatross demo! Here are some things to try: \n\n 1. Add a new item \n 2. Check it out from storage \n 3. Check it back in \n 4. Generate a report \n 5. Have fun :)");
-        //Get the date using the getDate() method
-        //txtDate.setText(getDate());
+        txtWelcome.setText("Thank you for installing the Albatross demo! Here are some things to try: " +
+                "\n\n 1. Add a new item " +
+                "\n 2. Check it out from storage " +
+                "\n 3. Check it back into storage " +
+                "\n 4. Generate a report " +
+                "\n\nHave fun :)" +
+                "\n\nThe Albatross Team");
+
 
         //Clicking btnHelp should open help documentation in Google Docs.
         btnHelp.setOnClickListener(new View.OnClickListener() {
