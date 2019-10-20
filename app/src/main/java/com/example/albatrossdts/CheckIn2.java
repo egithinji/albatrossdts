@@ -231,7 +231,7 @@ public class CheckIn2 extends Fragment {
         //Get all the variables needed to create a Transaction object
         String barcode_number = sharedPreferences.getString("document_barcode_number","");
         String document_title = sharedPreferences.getString("document_title","");
-        String uid = user.getUid();
+        String uid = employeeSharedPreferences.getString("uid","");
         String employee_name = employeeSharedPreferences.getString("first_name","")+" "+employeeSharedPreferences.getString("last_name","");
         String transaction_type = MainActivity.TRANSACTION_TYPE_CHECKIN;
         //Purpose is obtained from parameter passed into this method

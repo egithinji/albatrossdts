@@ -238,7 +238,7 @@ public class AddNewDocument4 extends Fragment {
         String barcode_number = sharedPref.getString("barcode_number","");
         String document_title = sharedPref.getString("title","");
         FirebaseUser user = mAuth.getCurrentUser();
-        String uid = user.getUid();
+        String uid = employeeSharedPref.getString("uid","");
         String employee_name = employeeSharedPref.getString("first_name","")+" "+employeeSharedPref.getString("last_name","");
         String transaction_type = MainActivity.TRANSACTION_TYPE_ADD;
         String purpose = null; //Adding a new document does not require a purpose
@@ -400,7 +400,9 @@ public class AddNewDocument4 extends Fragment {
         //get the user's uid from the firebase auth
         //return this document
 
-        FirebaseUser user = mAuth.getCurrentUser();
+        //Get user data from shared preferences
+        SharedPreferences employeeSharedPref = getActivity().getSharedPreferences("EmployeeData",0);
+
 
         String barcode_number = sharedPref.getString("barcode_number","");
         String title = sharedPref.getString("title","");
@@ -408,7 +410,7 @@ public class AddNewDocument4 extends Fragment {
         String permanent_location = sharedPref.getString("location","");
         String currently_checked_out_to = null;
         String photo_url = sharedPref.getString("photo_url","");
-        String added_by = user.getUid();
+        String added_by = employeeSharedPref.getString("uid","");
 
         Document d = new Document(barcode_number,title,description,permanent_location,currently_checked_out_to,null,null,photo_url,added_by);
 

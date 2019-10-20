@@ -291,7 +291,7 @@ public class DeleteDocument2 extends Fragment {
         //Get all the variables needed to create a Transaction object
         String barcode_number = sharedPref.getString("document_barcode_number","");
         String document_title = sharedPref.getString("document_title","");
-        String uid = user.getUid();
+        String uid = employeeSharedPref.getString("uid","");
         String employee_name = employeeSharedPref.getString("first_name","")+" "+employeeSharedPref.getString("last_name","");
         String transaction_type = MainActivity.TRANSACTION_TYPE_DELETE;
         //Purpose is obtained from parameter passed into this method

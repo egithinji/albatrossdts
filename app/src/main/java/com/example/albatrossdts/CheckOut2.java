@@ -219,7 +219,7 @@ public class CheckOut2 extends Fragment {
                                     final DocumentReference dr = qds.getReference();
                                     //Update the 'checked out to'value of this document
                                     dr
-                                            .update("currently_checked_out_to",user.getUid()) //Had to get uid from the user object instead of employeeSharedPreferences to avoid issues
+                                            .update("currently_checked_out_to",employeeSharedPreferences.getString("uid","")) //Had to get uid from the user object instead of employeeSharedPreferences to avoid issues
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
@@ -250,7 +250,7 @@ public class CheckOut2 extends Fragment {
                                      final DocumentReference dr = qds.getReference();
                                     //Update the 'checked out to'value of this document
                                     dr
-                                            .update("currently_checked_out_to",user.getUid())//Had to get uid from the user object instead of employeeSharedPreferences to avoid issues
+                                            .update("currently_checked_out_to",employeeSharedPreferences.getString("uid",""))//Had to get uid from the user object instead of employeeSharedPreferences to avoid issues
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
@@ -286,7 +286,7 @@ public class CheckOut2 extends Fragment {
         //Get all the variables needed to create a Transaction object
         String barcode_number = sharedPreferences.getString("document_barcode_number","");
         String document_title = sharedPreferences.getString("document_title","");
-        String uid = user.getUid();
+        String uid = employeeSharedPreferences.getString("uid","");
         String employee_name = employeeSharedPreferences.getString("first_name","")+" "+employeeSharedPreferences.getString("last_name","");
         String transaction_type = MainActivity.TRANSACTION_TYPE_CHECKOUT;
         //Purpose is obtained from parameter passed into this method

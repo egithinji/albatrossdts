@@ -107,8 +107,9 @@ public class Authentication extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                Log.i(TAG,"Successfully signed in "+user.getUid());
-                updateUid(user.getEmail(), user.getUid());
+                //Log.i(TAG,"Successfully signed in "+user.getUid());
+                //updateUid(user.getEmail(), user.getUid());
+                loadDemoUser();//This is for the demo version
             }
             else {
                 // Sign in failed. If response is null the user canceled the
@@ -195,6 +196,49 @@ public class Authentication extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    private void loadDemoUser() {
+        //Get demo user data from database and load into shared preferences.
+        //Load signed in fragment
+        //Display activity_main_drawer_demo
+
+        //Get the data associated with the demo user and load into shared preferences
+        db.collection("employees")
+                .whereEqualTo("email_address", "albatrosssuite@gmail.com")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            for (final QueryDocumentSnapshot document : task.getResult()) {//Should only be one record
+                                //Store the demo employee's data in shared preferences for use throughout the app
+                                Employee employee = document.toObject(Employee.class);
+
+                                SharedPreferences sharedPref = getSharedPreferences("EmployeeData",0);
+                                SharedPreferences.Editor editor = sharedPref.edit();
+                                editor.putString("uid",employee.getUid());
+                                editor.putString("email_address",employee.getEmail_address());
+                                editor.putString("first_name",employee.getFirst_name());
+                                editor.putString("last_name",employee.getLast_name());
+                                editor.putString("group",employee.getGroup());
+                                editor.apply();
+                            }
+                            //Send the signed-in user to the main activity
+                            Intent intent = new Intent(Authentication.this,MainActivity.class);
+                            startActivity(intent);
+                            finish();//Needed so the user can't come back track here after successful sign-in. See https://stackoverflow.com/questions/8631095/how-to-prevent-going-back-to-the-previous-activity
+
+
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+
+
     }
 
     @Override

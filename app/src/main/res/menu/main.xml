@@ -13,4 +13,10 @@
         android:orderInCategory="100"
         android:title="Privacy Policy"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_sign_out"
+        android:orderInCategory="110"
+        android:title="Sign Out"
+        app:showAsAction="never" />
 </menu>

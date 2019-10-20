@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity
     * Only admin users should have access to the reporting features.
     * */
 
-    public static int MENU_ID = R.menu.activity_main_drawer_demo; //This is for the demo version of the app. Production should be set to drawer_signedout
+    public static int MENU_ID = R.menu.activity_main_drawer_signedout; //This is for the demo version of the app. Production should be set to drawer_signedout
 
     //An arraylist used for holding employee objects. Used in DocumentsPerEmployee fragment
     public static ArrayList<Employee> employeeObjects = new ArrayList<>();
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity
         //Initialize mAuth
         mAuth = FirebaseAuth.getInstance();
 
-        replaceFragment(getNameOfFragmentToLoad(),false);
+        //replaceFragment(getNameOfFragmentToLoad(),false);
 
         updateEmailNotification();
 
@@ -120,10 +120,10 @@ public class MainActivity extends AppCompatActivity
 
         //By default the HomeSignedOutFragment should be loaded
         /*See https://www.youtube.com/watch?v=bjYstsO1PgI and https://www.youtube.com/watch?v=BMTNaPcPjdw for fragments*/
-        //HomeSignedOutFragment homeSignedOutFragment = HomeSignedOutFragment.newInstance(null,null);
-        //FragmentManager fragmentManager = getSupportFragmentManager();
-        //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        //fragmentTransaction.add(R.id.fragment_container,homeSignedOutFragment).commit();
+        HomeSignedOutFragment homeSignedOutFragment = HomeSignedOutFragment.newInstance(null,null);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.fragment_container,homeSignedOutFragment).commit();
 
         //Check the logged in user's credentials and set the MENU_ID to the correct value
         //Also load the correct fragment
@@ -358,7 +358,6 @@ public class MainActivity extends AppCompatActivity
             intent.setData(Uri.parse("https://docs.google.com/document/d/1sgw_91bhErpNfZ-aN9jXona81LIEVNu570ZBnj0P8SY/edit?usp=sharing"));
             startActivity(intent);
 
-
         }else if(id == R.id.action_help){
             //Open help google doc
 
@@ -366,6 +365,30 @@ public class MainActivity extends AppCompatActivity
             intent.setAction(Intent.ACTION_VIEW);
             intent.addCategory(Intent.CATEGORY_BROWSABLE);
             intent.setData(Uri.parse("https://docs.google.com/document/d/1xFmmhKwzJUZKObq4KCuRgQt0m6w_SeEcY2-S_zBvT_w/edit?usp=sharing"));
+            startActivity(intent);
+
+        }else if(id == R.id.action_sign_out){
+
+            //Sign out the user
+            //Clear the shared preferences for the employee
+            SharedPreferences sharedPref = getSharedPreferences("EmployeeData",0);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.clear();
+            editor.commit();
+
+            //Clear the shared preferences for adding new document
+            SharedPreferences sharedPreferencesAddNew = getSharedPreferences("AddNewDocumentData",0);
+            editor = sharedPreferencesAddNew.edit();
+            editor.clear();
+            editor.commit();
+
+            //Clear the CURRENT_FRAGMENT variable so it starts afresh on sign in
+            CURRENT_FRAGMENT = "";
+
+            //Firebase sign out
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = getIntent();
+            finish();
             startActivity(intent);
         }
 
@@ -429,50 +452,33 @@ public class MainActivity extends AppCompatActivity
 
     private void checkIfCurrentUserSignedIn(){
 
-        loadDemoUser();//This is for the demo app on the playstore.
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        if (user != null) {
+            // User is signed in.
+            Log.i(TAG,"User is signed in.");
+
+            replaceFragment(getNameOfFragmentToLoad(),false);
+
+            //Check shared preferences to see if this user is admin.
+            //Adjust the MENU_ID accordingly
+
+            //Get user data from shared preferences
+            SharedPreferences sharedPref = getSharedPreferences("EmployeeData",0);
+
+                MENU_ID = R.menu.activity_main_drawer_demo;
 
 
-    }
-
-    private void loadDemoUser() {
-        //Get demo user data from database and load into shared preferences.
-        //Load signed in fragment
-        //Display activity_main_drawer_demo
-
-        //Get the data associated with the demo user and load into shared preferences
-        db.collection("employees")
-                .whereEqualTo("email_address", "albatrosssuite@gmail.com")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-
-                                for (final QueryDocumentSnapshot document : task.getResult()) {//Should only be one record
-                                    //Store the demo employee's data in shared preferences for use throughout the app
-                                    Employee employee = document.toObject(Employee.class);
-
-                                    SharedPreferences sharedPref = getSharedPreferences("EmployeeData",0);
-                                    SharedPreferences.Editor editor = sharedPref.edit();
-                                    editor.putString("uid",employee.getUid());
-                                    editor.putString("email_address",employee.getEmail_address());
-                                    editor.putString("first_name",employee.getFirst_name());
-                                    editor.putString("last_name",employee.getLast_name());
-                                    editor.putString("group",employee.getGroup());
-                                    editor.apply();
-                                }
-                            replaceFragment(getNameOfFragmentToLoad(),false);
-
-
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
-
-
+        } else {
+            // User not signed in.
+            Log.i(TAG,"User is not signed in.");
+            //Set the menu to the signedout menu
+            MENU_ID = R.menu.activity_main_drawer_signedout;
+        }
 
     }
+
+
 
     public void replaceFragment(String fragmentName, boolean allowBack){
         //Replaces the fragment in the frame_layout in app_bar_main.xml
