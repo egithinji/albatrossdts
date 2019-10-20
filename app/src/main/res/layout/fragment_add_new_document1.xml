@@ -49,6 +49,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/txtDocumentTitle"
                     android:background="@drawable/edit_text_normal"
                     android:fontFamily="@font/montserratlight"
+                    android:inputType="textCapSentences"
                     />
 
                 <TextView
@@ -63,7 +64,8 @@
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtEditDocumentTitle"
-                    android:fontFamily="@font/montserratlight"/>
+                    android:fontFamily="@font/montserratlight"
+                    />
 
                 <EditText
                     android:id="@+id/txtEditDocumentDescription"
@@ -72,7 +74,8 @@
                     app:layout_constraintStart_toStartOf="@+id/txtDocumentDescription"
                     app:layout_constraintTop_toBottomOf="@+id/txtDocumentDescription"
                     android:background="@drawable/edit_text_normal"
-                    android:fontFamily="@font/montserratlight"/>
+                    android:fontFamily="@font/montserratlight"
+                    android:inputType="textCapSentences"/>
 
                 <TextView
                     android:id="@+id/txtPermanentLocation"
