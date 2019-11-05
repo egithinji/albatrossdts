@@ -1,4 +1,4 @@
-package com.example.albatrossdts;
+package africa.albatross.albatrossdts;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import africa.albatross.albatrossdts.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -45,7 +46,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -396,9 +396,9 @@ public class DocumentsSummary1 extends Fragment {
                             //The following code and the FOR loop below is for the demo version.
                             //For production should remove it and uncomment above for loop
 
-                            /*Document document1 = new Document("100","Dewalt Drill","Dewalt DCD771C2 battery drill","Steel Cabinet","John Doe (jdoe@example.com)","Taken to site","1","https://firebasestorage.googleapis.com/v0/b/albatrossdts.appspot.com/o/images%2Fbattery-19983_640.jpg?alt=media&token=fa5408a1-8db3-480e-8d7a-8dd882fa84bd","Admin");
-                            Document document2 = new Document("101","Title Deed","Title for LR No. 1234/5","Filing Cabinet","Adam Smith (asmith@example.com)","To bank as security","2","https://firebasestorage.googleapis.com/v0/b/albatrossdts.appspot.com/o/images%2Fcertificate-154169_640.png?alt=media&token=b56bb8d9-23ec-485a-a3e3-7e18237e9b3c","Admin");
-                            Document document3 = new Document("102","Tablet","iPad Pro 2018","Safe","Jane Doe (janedoe@example.com)","For sales and marketing","3","https://firebasestorage.googleapis.com/v0/b/albatrossdts.appspot.com/o/images%2Fipad-147691_640.png?alt=media&token=0705789c-2647-4ef0-be4e-f681eb03cddf","Admin");
+                            /*Document document1 = new Document("100","Dewalt Drill","Dewalt DCD771C2 battery drill","Steel Cabinet","John Doe (jdoe@albatross.com)","Taken to site","1","https://firebasestorage.googleapis.com/v0/b/albatrossdts.appspot.com/o/images%2Fbattery-19983_640.jpg?alt=media&token=fa5408a1-8db3-480e-8d7a-8dd882fa84bd","Admin");
+                            Document document2 = new Document("101","Title Deed","Title for LR No. 1234/5","Filing Cabinet","Adam Smith (asmith@albatross.com)","To bank as security","2","https://firebasestorage.googleapis.com/v0/b/albatrossdts.appspot.com/o/images%2Fcertificate-154169_640.png?alt=media&token=b56bb8d9-23ec-485a-a3e3-7e18237e9b3c","Admin");
+                            Document document3 = new Document("102","Tablet","iPad Pro 2018","Safe","Jane Doe (janedoe@albatross.com)","For sales and marketing","3","https://firebasestorage.googleapis.com/v0/b/albatrossdts.appspot.com/o/images%2Fipad-147691_640.png?alt=media&token=0705789c-2647-4ef0-be4e-f681eb03cddf","Admin");
                             ArrayList<Document> docs = new ArrayList<>();
                             docs.add(document1);
                             docs.add(document2);
@@ -608,7 +608,7 @@ public class DocumentsSummary1 extends Fragment {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    txtStatus.setText("An error occurred sending the email. Please verify email credentials in Settings, or contact the administrator.");
+                    txtStatus.setText("An error occurred sending the email. Please make sure you are connected to the Internet, or contact the administrator.");
                 }
             });
         }

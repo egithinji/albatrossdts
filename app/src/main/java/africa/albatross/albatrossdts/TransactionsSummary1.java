@@ -1,4 +1,4 @@
-package com.example.albatrossdts;
+package africa.albatross.albatrossdts;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -19,9 +19,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import africa.albatross.albatrossdts.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -42,7 +42,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -463,7 +462,7 @@ public class TransactionsSummary1 extends Fragment {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    txtStatus.setText("An error occurred sending the email. Please verify email credentials in Settings, or contact the administrator.");
+                    txtStatus.setText("An error occurred sending the email. Please make sure you are connected to the Internet, or contact the administrator.");
                 }
             });
         }

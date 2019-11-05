@@ -1,4 +1,4 @@
-package com.example.albatrossdts;
+package africa.albatross.albatrossdts;
 
 public class Employee {
     private String uid;

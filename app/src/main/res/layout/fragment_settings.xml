@@ -8,7 +8,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Settings">
+    tools:context="africa.albatross.albatrossdts.Settings">
 
    <TextView
         android:id="@+id/txtSettingsTitle"

@@ -1,4 +1,4 @@
-package com.example.albatrossdts;
+package africa.albatross.albatrossdts;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import africa.albatross.albatrossdts.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -64,6 +65,9 @@ public class AddNewDocument1 extends Fragment {
 
     //Next button
     Button btnNext;
+
+    //Back button
+    Button btnBack;
 
     private OnFragmentInteractionListener mListener;
 
@@ -143,6 +147,9 @@ public class AddNewDocument1 extends Fragment {
         btnNext = view.findViewById(R.id.btnNext1AddNew);
         btnNext.setEnabled(false); //It will be enabled after the spinner has been populated by getLocations().
 
+        //Initialize back button
+        btnBack = view.findViewById(R.id.btnBack1AddNew);
+
         //Create the adapter
         adapter = new  ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, locationList);
 
@@ -160,6 +167,14 @@ public class AddNewDocument1 extends Fragment {
             @Override
             public void onClick(View view) {
                 validate();
+            }
+        });
+
+        //Set onClick for back button
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).replaceFragment("HomeSignedInFragment",false);
             }
         });
 

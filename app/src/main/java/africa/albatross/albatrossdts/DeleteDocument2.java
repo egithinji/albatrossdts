@@ -1,4 +1,4 @@
-package com.example.albatrossdts;
+package africa.albatross.albatrossdts;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -33,6 +33,7 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import africa.albatross.albatrossdts.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

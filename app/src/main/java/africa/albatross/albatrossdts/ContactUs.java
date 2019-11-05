@@ -1,4 +1,4 @@
-package com.example.albatrossdts;
+package africa.albatross.albatrossdts;
 
 import android.content.Context;
 import android.net.Uri;
@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import africa.albatross.albatrossdts.R;
 
 
 /**
@@ -67,7 +69,7 @@ public class ContactUs extends Fragment {
         //Instantiate views
         txtContactUs = view.findViewById(R.id.txtContactUs);
 
-        String text = "Drop us an email at info@albatross.africa and let's discuss how we can work together to address your tracking needs.";
+        String text = "Drop us an email at info@albatross.africa and let's discuss how the Albatross Team can help you with your equipment, inventory, or document tracking needs.";
 
         txtContactUs.setText(text);
 

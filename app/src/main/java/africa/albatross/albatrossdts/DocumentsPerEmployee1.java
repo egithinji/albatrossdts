@@ -1,4 +1,4 @@
-package com.example.albatrossdts;
+package africa.albatross.albatrossdts;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -21,11 +21,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import africa.albatross.albatrossdts.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -245,7 +245,7 @@ public class DocumentsPerEmployee1 extends Fragment {
         //Write the cell
         XSSFCell employeeNameCell = row.createCell(0);
         employeeNameCell.setCellValue("Employee: "+spinnerEmployee.getSelectedItem().toString());
-        //employeeNameCell.setCellValue("Employee: John Doe (jdoe@example.com)");//For demo. Remove and replace with commented line above for production.
+        //employeeNameCell.setCellValue("Employee: John Doe (jdoe@albatross.com)");//For demo. Remove and replace with commented line above for production.
         employeeNameCell.setCellStyle(styleEmployeeName);
 
 
@@ -439,7 +439,7 @@ public class DocumentsPerEmployee1 extends Fragment {
                                 //For production should remove it and uncomment above for loop
 
 
-                                /*Transaction transaction1 = new Transaction("100", "Dewalt Drill", "1", "John Doe (jdoe@example.com)", "Check-out", "Taken to site", Timestamp.now());
+                                /*Transaction transaction1 = new Transaction("100", "Dewalt Drill", "1", "John Doe (jdoe@albatross.com)", "Check-out", "Taken to site", Timestamp.now());
 
 
                                 //Increment count and update progress bar
@@ -611,7 +611,7 @@ public class DocumentsPerEmployee1 extends Fragment {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    txtStatus.setText("An error occurred sending the email. Please verify email credentials in Settings, or contact the administrator.");
+                    txtStatus.setText("An error occurred sending the email. Please make sure you are connected to the Internet or contact the admin.");
                 }
             });
         }

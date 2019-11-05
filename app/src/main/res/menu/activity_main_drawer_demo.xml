@@ -29,9 +29,13 @@
                     android:id="@+id/nav_action4"
                     android:icon="@drawable/deleteicon"
                     android:title="Delete" />
+                <item
+                    android:id="@+id/nav_view_items"
+                    android:icon="@drawable/view_icon"
+                    android:title="View Items"
+                    />
             </menu>
         </item>
-
         <item android:title="Reports">
             <menu>
                 <item

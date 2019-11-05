@@ -1,14 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.ViewItems">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".ui.ViewItems">
 
-</FrameLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="199dp"
+            android:layout_height="31dp"
+            android:text="View Items"
+            android:textColor="@color/colorPrimary"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintVertical_bias="0.18"
+            android:fontFamily="@font/montserratregular"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/txtBarcodeHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="28dp"
+            android:text="Barcode number:"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            android:fontFamily="@font/montserratlight"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/txtBarcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            app:layout_constraintLeft_toRightOf="@+id/txtBarcodeHeader"
+            app:layout_constraintTop_toTopOf="@id/txtBarcodeHeader"
+            android:fontFamily="@font/montserratlight"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/txtTitleHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Title:"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtBarcodeHeader"
+            android:fontFamily="@font/montserratlight"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            app:layout_constraintLeft_toRightOf="@+id/txtTitleHeader"
+            app:layout_constraintTop_toTopOf="@id/txtTitleHeader"
+            android:fontFamily="@font/montserratlight"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/txtDescriptionHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Description:"
+            app:layout_constraintLeft_toLeftOf="@id/txtTitleHeader"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitleHeader"
+            android:fontFamily="@font/montserratlight"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/txtDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            app:layout_constraintLeft_toRightOf="@+id/txtDescriptionHeader"
+            app:layout_constraintTop_toTopOf="@+id/txtDescriptionHeader"
+            android:fontFamily="@font/montserratlight"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/txtLocationHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Storage Location:"
+            app:layout_constraintLeft_toLeftOf="@+id/txtDescriptionHeader"
+            app:layout_constraintTop_toBottomOf="@+id/txtDescriptionHeader"
+            android:fontFamily="@font/montserratlight"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/txtLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            app:layout_constraintLeft_toRightOf="@id/txtLocationHeader"
+            app:layout_constraintTop_toTopOf="@id/txtLocationHeader"
+            android:fontFamily="@font/montserratlight"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/txtCurrentlyCheckedOutHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Currently checked out to: "
+            app:layout_constraintLeft_toLeftOf="@+id/txtLocationHeader"
+            app:layout_constraintTop_toBottomOf="@+id/txtLocationHeader"
+            android:fontFamily="@font/montserratlight"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/txtCurrentlyCheckedOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            app:layout_constraintLeft_toRightOf="@id/txtCurrentlyCheckedOutHeader"
+            app:layout_constraintTop_toTopOf="@id/txtCurrentlyCheckedOutHeader"
+            android:fontFamily="@font/montserratlight"
+            android:textSize="16sp"/>
+
+
+        <ImageView
+            android:id="@+id/imgPhoto"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="25dp"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtCurrentlyCheckedOutHeader"
+            android:fontFamily="@font/montserratlight"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/imgPhoto"
+            app:layout_constraintEnd_toEndOf="@+id/imgPhoto"
+            app:layout_constraintStart_toStartOf="@+id/imgPhoto"
+            app:layout_constraintTop_toTopOf="@+id/imgPhoto" />
+
+        <Button
+            android:id="@+id/btnBackViewItems"
+            android:layout_width="121dp"
+            android:layout_height="52dp"
+            android:background="@drawable/button_selector"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:text="PREV"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            app:layout_constraintHorizontal_bias="0.594"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/btnNextViewItems"
+            app:layout_constraintTop_toTopOf="@+id/btnNextViewItems"
+            android:fontFamily="@font/montserratlight"/>
+
+        <Button
+            android:id="@+id/btnNextViewItems"
+            android:enabled="false"
+            android:layout_width="121dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/button_selector"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:text="NEXT"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            app:layout_constraintHorizontal_bias=".8"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgPhoto"
+            android:fontFamily="@font/montserratlight"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

@@ -10,7 +10,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".CheckIn1">
+    tools:context="africa.albatross.albatrossdts.CheckIn1">
 
     <TextView
         android:id="@+id/textView"
@@ -88,19 +88,37 @@
         android:id="@+id/btnNextCheckIn1"
         android:layout_width="121dp"
         android:layout_height="52dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="68dp"
         android:background="@drawable/button_selector"
+        android:enabled="false"
+        android:fontFamily="@font/montserratlight"
         android:minWidth="0dp"
         android:minHeight="0dp"
         android:text="NEXT"
         android:textAllCaps="false"
         android:textSize="16sp"
+        app:layout_constraintHorizontal_bias="0.789"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnScanBarcode"
-        android:enabled="false"
+        app:layout_constraintTop_toBottomOf="@+id/btnScanBarcode" />
+
+    <Button
+        android:id="@+id/btnBackCheckIn1"
+        android:layout_width="121dp"
+        android:layout_height="52dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/button_selector"
         android:fontFamily="@font/montserratlight"
-        />
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:text="BACK"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        app:layout_constraintHorizontal_bias="0.055"
+        app:layout_constraintEnd_toStartOf="@+id/btnNextCheckIn1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnNextCheckIn1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

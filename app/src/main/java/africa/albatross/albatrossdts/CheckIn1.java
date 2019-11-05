@@ -1,4 +1,4 @@
-package com.example.albatrossdts;
+package africa.albatross.albatrossdts;
 
 import android.Manifest;
 import android.content.Context;
@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import africa.albatross.albatrossdts.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -55,6 +56,7 @@ public class CheckIn1 extends Fragment {
     private TextView txtDocumentDescription;
     private Button btnScanBarcode;
     private Button btnNext;
+    private Button btnBack;
     private RelativeLayout layoutScanResults;
 
     //Shared prefs
@@ -110,6 +112,7 @@ public class CheckIn1 extends Fragment {
         txtDocumentDescription = view.findViewById(R.id.txtDocumentDescriptionCheckIn);
         btnScanBarcode = view.findViewById(R.id.btnScanBarcode);
         btnNext = view.findViewById(R.id.btnNextCheckIn1);
+        btnBack = view.findViewById(R.id.btnBackCheckIn1);
         layoutScanResults = view.findViewById(R.id.layoutScanResults);
 
         //OnClick for scanbarcode button
@@ -125,6 +128,14 @@ public class CheckIn1 extends Fragment {
             @Override
             public void onClick(View view) {
                 goNext();
+            }
+        });
+
+        //OnClick for btnBack
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).replaceFragment("HomeSignedInFragment",false);
             }
         });
 
@@ -149,7 +160,7 @@ public class CheckIn1 extends Fragment {
         //Replaces the fragment in the frame_layout in app_bar_main.xml
 
         //See solution at https://stackoverflow.com/questions/13216916/how-to-replace-the-activitys-fragment-from-the-fragment-itself/13217087
-        ((MainActivity)getActivity()).replaceFragment("CheckIn2",true);
+        ((MainActivity)getActivity()).replaceFragment("CheckIn2",false);
     }
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

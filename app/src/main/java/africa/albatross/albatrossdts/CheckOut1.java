@@ -1,4 +1,4 @@
-package com.example.albatrossdts;
+package africa.albatross.albatrossdts;
 
 import android.Manifest;
 import android.content.Context;
@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import africa.albatross.albatrossdts.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -56,6 +57,7 @@ public class CheckOut1 extends Fragment {
     TextView txtDocumentDescription;
     RelativeLayout layoutScanResults;
     Button btnNext;
+    Button btnBack;
 
 
     //Shared prefs
@@ -115,6 +117,7 @@ public class CheckOut1 extends Fragment {
         txtDocumentDescription = view.findViewById(R.id.txtDocumentDescriptionCheckOut);
         layoutScanResults = view.findViewById(R.id.layoutScanResults);
         btnNext = view.findViewById(R.id.btnNextCheckOut1);
+        btnBack = view.findViewById(R.id.btnBackCheckOut1);
 
         //OnClick for scanbarcode button
         btnScanBarcode.setOnClickListener(new View.OnClickListener() {
@@ -131,6 +134,15 @@ public class CheckOut1 extends Fragment {
                 goNext();
             }
         });
+
+        //OnClick for back button
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).replaceFragment("HomeSignedInFragment",false);
+            }
+        });
+
         sharedPreferences = getContext().getSharedPreferences("CheckOutDocumentData",0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();

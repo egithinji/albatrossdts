@@ -10,7 +10,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".DeleteDocument2"
+    tools:context="africa.albatross.albatrossdts.DeleteDocument2"
     android:paddingBottom="30dp">
 
     <TextView

@@ -1,4 +1,4 @@
-package com.example.albatrossdts;
+package africa.albatross.albatrossdts;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -20,8 +18,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import africa.albatross.albatrossdts.R;
+import africa.albatross.albatrossdts.ui.ViewItems;
+
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
@@ -55,7 +55,8 @@ public class MainActivity extends AppCompatActivity
         TransactionsSummary1.OnFragmentInteractionListener,
         TransactionsByDocument1.OnFragmentInteractionListener,
         Settings.OnFragmentInteractionListener,
-        ContactUs.OnFragmentInteractionListener{
+        ContactUs.OnFragmentInteractionListener,
+        ViewItems.OnFragmentInteractionListener {
 
     private static final String TAG = "Info:";
     private static String CURRENT_FRAGMENT = ""; //TODO: This was an attempt at fixing the issue when activity is destroyed upon screen rotation but didn't work too well. I've temporarily disabled landscape orientation.
@@ -317,6 +318,10 @@ public class MainActivity extends AppCompatActivity
             case "ContactUs":
                 fragment = ContactUs.newInstance(null,null);
                 CURRENT_FRAGMENT = "ContactUs";
+
+            case "ViewItems":
+                fragment = ViewItems.newInstance(null,null);
+                CURRENT_FRAGMENT = "ViewItems";
         }
 
         return fragment;
@@ -443,6 +448,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_contact_us){
             //Start ContactUs
             replaceFragment("ContactUs",true);
+
+        } else if (id == R.id.nav_view_items){
+            //Start ViewItems
+            replaceFragment("ViewItems",true);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

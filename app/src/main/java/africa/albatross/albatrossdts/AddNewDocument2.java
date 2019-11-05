@@ -1,4 +1,4 @@
-package com.example.albatrossdts;
+package africa.albatross.albatrossdts;
 
 import android.Manifest;
 import android.content.Context;
@@ -32,6 +32,7 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import africa.albatross.albatrossdts.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -134,7 +135,7 @@ public class AddNewDocument2 extends Fragment {
         SharedPreferences sharedPref = getContext().getSharedPreferences("AddNewDocumentData",0);
         String link = sharedPref.getString("photo_url","");
         if(link.equals("")){
-            uploadedPhotoURL="https://firebasestorage.googleapis.com/v0/b/albatrossdts-a9920.appspot.com/o/images%2Fscroll-309839_640.png?alt=media&token=f03c8407-df65-4b46-ae85-0cb1675a91d1"; //TODO: This is a temporary placeholder. Replace.
+            uploadedPhotoURL="https://firebasestorage.googleapis.com/v0/b/albatrossdts.appspot.com/o/images%2Ffolder-303891_640.png?alt=media&token=34966164-09db-42f9-b0d3-4356d852ed73"; //TODO: This is a temporary placeholder. Replace.
         }else{
             uploadedPhotoURL= link;
         }
@@ -273,7 +274,7 @@ public class AddNewDocument2 extends Fragment {
             // Continue only if the File was successfully created
             if (photoFile != null) {
                 Uri photoURI = FileProvider.getUriForFile(getContext(),
-                        "com.example.albatrossdts.fileprovider",
+                        "africa.albatross.albatrossdts.fileprovider",
                         photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 Log.i(TAG,"About to start camera intent.");

@@ -1,4 +1,4 @@
-package com.example.albatrossdts.ui.tools;
+package africa.albatross.albatrossdts.ui.tools;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

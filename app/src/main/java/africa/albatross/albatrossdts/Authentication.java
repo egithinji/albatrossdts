@@ -1,4 +1,4 @@
-package com.example.albatrossdts;
+package africa.albatross.albatrossdts;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import africa.albatross.albatrossdts.R;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -64,13 +65,13 @@ public class Authentication extends AppCompatActivity {
                             deepLink = pendingDynamicLinkData.getLink();
                         }
 
-                        // Handle the deep link. For example, open the linked
+                        // Handle the deep link. For albatross, open the linked
                         // content, or apply promotional credit to the user's
                         // account.
                         // ...
 
                         ActionCodeSettings actionCodeSettings = ActionCodeSettings.newBuilder()
-                                .setAndroidPackageName(/* yourPackageName= */ "com.example.albatrossdts",/* installIfNotAvailable= */ true, /* minimumVersion= */ null)
+                                .setAndroidPackageName(/* yourPackageName= */ "africa.albatross.albatrossdts",/* installIfNotAvailable= */ true, /* minimumVersion= */ null)
                                 .setHandleCodeInApp(true) // This must be set to true
                                 .setUrl("https://albatrossdts.page.link") // This URL needs to be whitelisted
                                 .setDynamicLinkDomain("albatrossdts.page.link")

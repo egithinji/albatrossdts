@@ -1,4 +1,4 @@
-package com.example.albatrossdts;
+package africa.albatross.albatrossdts;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import africa.albatross.albatrossdts.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -135,8 +136,8 @@ public class AddNewDocument4 extends Fragment {
         //Set the values as per the shared preferences
         sharedPref = getActivity().getSharedPreferences("AddNewDocumentData",0);
 
-        txtSummaryDocumentTitle.setText("Document title: "+sharedPref.getString("title",""));
-        txtSummaryDocumentDescription.setText("Document description: "+sharedPref.getString("description",""));
+        txtSummaryDocumentTitle.setText("Item title: "+sharedPref.getString("title",""));
+        txtSummaryDocumentDescription.setText("Item description: "+sharedPref.getString("description",""));
         txtSummaryLocation.setText("Permanent storage location: "+sharedPref.getString("location",""));
         Glide.with(getContext())
                 .asBitmap()

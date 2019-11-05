@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.albatrossdts">
+    package="africa.albatross.albatrossdts">
 
     <application
         android:allowBackup="true"
@@ -12,7 +12,7 @@
 
         <!-- See https://medium.com/@shishirthedev/the-right-way-to-implement-a-splash-screen-in-android-acae0e52949a -->
         <activity
-            android:name=".SplashScreenActivity"
+            android:name="africa.albatross.albatrossdts.SplashScreenActivity"
             android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,8 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SimpleScannerActivity" />
-        <activity android:name=".Authentication">
+        <activity android:name="africa.albatross.albatrossdts.SimpleScannerActivity" />
+        <activity android:name="africa.albatross.albatrossdts.Authentication">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -34,7 +34,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="africa.albatross.albatrossdts.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"> <!-- TODO: Temporary measure until figure out how to properly handle destruction of activity due to screen orientation change -->
@@ -47,7 +47,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.albatrossdts.fileprovider"
+            android:authorities="africa.albatross.albatrossdts.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

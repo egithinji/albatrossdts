@@ -1,4 +1,4 @@
-package com.example.albatrossdts;
+package africa.albatross.albatrossdts;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import africa.albatross.albatrossdts.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -45,6 +47,7 @@ public class DeleteDocument1 extends Fragment {
     EditText txtEditBarcodeNumber;
     ImageView imgSearch;
     ProgressBar progressBar;
+    Button btnBack;
 
 
     //Shared preferences
@@ -102,6 +105,7 @@ public class DeleteDocument1 extends Fragment {
         txtEditBarcodeNumber = view.findViewById(R.id.txtEditBarcodeNumber);
         imgSearch = view.findViewById(R.id.imgSearch);
         progressBar = view.findViewById(R.id.progressBar);
+        btnBack = view.findViewById(R.id.btnBackDelete);
 
         //Search button onClick listener
         imgSearch.setOnClickListener(new View.OnClickListener() {
@@ -115,6 +119,14 @@ public class DeleteDocument1 extends Fragment {
                     progressBar.setVisibility(View.VISIBLE);
                     getDocumentData((txtEditBarcodeNumber.getText().toString()).toUpperCase()); //Needs to be capitalized because of format of text on physical barcodes.
                 }
+            }
+        });
+
+        //Back button onClick listener
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).replaceFragment("HomeSignedInFragment",false);
             }
         });
 

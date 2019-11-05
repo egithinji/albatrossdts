@@ -1,4 +1,4 @@
-package com.example.albatrossdts;
+package africa.albatross.albatrossdts;
 
 import android.content.Context;
 import android.net.Uri;
@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
+
+import africa.albatross.albatrossdts.R;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.ActionCodeSettings;
@@ -82,6 +84,7 @@ public class HomeSignedOutFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 signInUser();
+
             }
         });
 
@@ -135,7 +138,7 @@ public class HomeSignedOutFragment extends Fragment {
         // and https://firebase.google.com/docs/dynamic-links/android/receive.
 
         ActionCodeSettings actionCodeSettings = ActionCodeSettings.newBuilder()
-                .setAndroidPackageName(/* yourPackageName= */ "com.example.albatrossdts",/* installIfNotAvailable= */ true, /* minimumVersion= */ null)
+                .setAndroidPackageName(/* yourPackageName= */ "africa.albatross.albatrossdts",/* installIfNotAvailable= */ true, /* minimumVersion= */ null)
                 .setHandleCodeInApp(true) // This must be set to true
                 .setUrl("https://albatrossdts.page.link") // This URL needs to be whitelisted
                 .setDynamicLinkDomain("albatrossdts.page.link")

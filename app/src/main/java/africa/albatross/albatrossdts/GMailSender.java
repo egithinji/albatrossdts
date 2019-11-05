@@ -1,4 +1,4 @@
-package com.example.albatrossdts;
+package africa.albatross.albatrossdts;
 
 import android.util.Log;
 
@@ -33,7 +33,7 @@ public class GMailSender extends javax.mail.Authenticator {
 
 
     static {
-        Security.addProvider(new com.example.albatrossdts.JSSEProvider());
+        Security.addProvider(new JSSEProvider());
     }
 
     public GMailSender(String user, String password) {

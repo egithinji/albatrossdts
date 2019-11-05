@@ -1,4 +1,4 @@
-package com.example.albatrossdts;
+package africa.albatross.albatrossdts;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,9 +7,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+
+import africa.albatross.albatrossdts.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -37,8 +40,12 @@ public class HomeSignedInFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     private TextView txtWelcome;
-    //private TextView txtDate;
     private TextView btnHelp;
+    private Button btnAddNew;
+    private Button btnCheckOut;
+    private Button btnCheckIn;
+    private Button btnViewItems;
+    private TextView txtWelcome2;
 
     public HomeSignedInFragment() {
         // Required empty public constructor
@@ -75,17 +82,20 @@ public class HomeSignedInFragment extends Fragment {
 
         //When signed in, the welcome message should display the user's name and today's date
         txtWelcome = view.findViewById(R.id.txtWelcomeMessage);
+        txtWelcome2 = view.findViewById(R.id.txtWelcomeMessage2);
         //txtDate = view.findViewById(R.id.txtDate);
         btnHelp = view.findViewById(R.id.btnHelp);
 
         //Username should be captured in mUsername
-        txtWelcome.setText("Thank you for installing the Albatross demo! Here are some things to try: " +
-                "\n\n 1. Add a new item " +
-                "\n 2. Check it out from storage " +
-                "\n 3. Check it back into storage " +
-                "\n 4. Generate a report " +
-                "\n\nHave fun :)" +
-                "\n\nThe Albatross Team");
+        txtWelcome.setText("Thank you for installing the Albatross demo! Here are some things to try:");
+
+        btnAddNew = view.findViewById(R.id.btn_add_new_item);
+        btnCheckOut = view.findViewById(R.id.btn_check_out);
+        btnCheckIn = view.findViewById(R.id.btn_check_in);
+        btnViewItems = view.findViewById(R.id.btn_view_items);
+
+
+        txtWelcome2.setText("Have fun :) \n\nThe Albatross Team");
 
 
         //Clicking btnHelp should open help documentation in Google Docs.
@@ -97,6 +107,34 @@ public class HomeSignedInFragment extends Fragment {
                 intent.addCategory(Intent.CATEGORY_BROWSABLE);
                 intent.setData(Uri.parse("https://docs.google.com/document/d/1xFmmhKwzJUZKObq4KCuRgQt0m6w_SeEcY2-S_zBvT_w/edit?usp=sharing"));
                 startActivity(intent);
+            }
+        });
+
+        btnAddNew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).replaceFragment("AddNewDocument1",true);
+            }
+        });
+
+        btnCheckOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).replaceFragment("CheckOut1",true);
+            }
+        });
+
+        btnCheckIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).replaceFragment("CheckIn1",true);
+            }
+        });
+
+        btnViewItems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).replaceFragment("ViewItems",true);
             }
         });
 

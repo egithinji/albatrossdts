@@ -13,10 +13,10 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.1"
     defaultConfig {
-        applicationId "com.example.albatrossdts"
+        applicationId "africa.albatross.albatrossdts"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 1
+        versionCode 4
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -71,3 +71,4 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'  // Google Play services Gradle plugin
+

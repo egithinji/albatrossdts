@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".ContactUs">
+        tools:context="africa.albatross.albatrossdts.ContactUs">
 
         <TextView
             android:id="@+id/textView"
@@ -33,11 +33,13 @@
             android:layout_marginRight="20dp"
             android:layout_width="310dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView"
             android:fontFamily="@font/montserratlight"
             android:textSize="20sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textAlignment="center"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

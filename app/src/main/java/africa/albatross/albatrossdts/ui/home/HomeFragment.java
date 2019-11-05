@@ -1,4 +1,4 @@
-package com.example.albatrossdts.ui.home;
+package africa.albatross.albatrossdts.ui.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.albatrossdts.R;
+import africa.albatross.albatrossdts.R;
 
 public class HomeFragment extends Fragment {
 

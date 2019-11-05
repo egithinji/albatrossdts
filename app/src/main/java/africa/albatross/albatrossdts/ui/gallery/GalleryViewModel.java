@@ -1,4 +1,4 @@
-package com.example.albatrossdts.ui.gallery;
+package africa.albatross.albatrossdts.ui.gallery;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

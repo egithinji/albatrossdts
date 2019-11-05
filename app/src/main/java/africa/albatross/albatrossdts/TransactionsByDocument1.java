@@ -1,4 +1,4 @@
-package com.example.albatrossdts;
+package africa.albatross.albatrossdts;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import africa.albatross.albatrossdts.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -536,7 +537,7 @@ public class TransactionsByDocument1 extends Fragment {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    txtStatus.setText("An error occurred sending the email. Please verify email credentials in Settings, or contact the administrator.");
+                    txtStatus.setText("An error occurred sending the email. Please make sure you are connected to the Internet, or contact the administrator.");
                 }
             });
         }
